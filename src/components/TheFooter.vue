@@ -72,6 +72,10 @@ footer {
   width: 100vw;
   padding: 100px;
 
+  @media screen and (max-width: 660px) {
+    padding: 4em;
+  }
+
   section {
     width: 100%;
   }
@@ -80,6 +84,10 @@ footer {
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
+
+    @media screen and (max-width: 660px) {
+      grid-template-columns: 1fr;
+    }
 
     :first-child {
       justify-self: start;
@@ -94,6 +102,11 @@ footer {
       align-items: center;
       flex-direction: column;
 
+      @media screen and (max-width: 660px) {
+        width: 100%;
+        margin-bottom: 4em;
+      }
+
       img {
         height: 10em;
       }
@@ -103,7 +116,8 @@ footer {
       display: flex;
       flex-direction: row;
       width: 100%;
-      justify-content: space-between;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
 
       div {
         h2 {
