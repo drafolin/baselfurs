@@ -8,7 +8,11 @@ import { RouterView } from 'vue-router'
   </header>
 
   <RouterView />
+
+  <footer>
+
+  </footer>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 </style>
