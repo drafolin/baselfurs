@@ -3,24 +3,22 @@
 * {
   box-sizing: border-box;
 
-  --text: black;
+  --foreground: black;
+  --background: #eee;
   --accent: #37505d;
 
   @media screen and (prefers-color-scheme: dark) {
-    --text: white;
+    --foreground: white;
+    --background: #333;
     --accent: #56a7d3;
   }
 }
 
 body {
-  color: var(--text);
+  color: var(--foreground);
+  background-color: var(--background);
   font-family: Jost, Helvetica, Arial, sans-serif;
   margin: 0;
-
-  @media screen and (prefers-color-scheme: dark) {
-    background-color: #333;
-    color: white;
-  }
 }
 
 main {
