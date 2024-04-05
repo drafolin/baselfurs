@@ -2,6 +2,9 @@
 import MeetPic from '@/assets/meetpic.jpg'
 import EventList from '@/components/EventList.vue'
 import { fetchNext } from '@/models/events'
+import Rolino from '@/assets/organizers/rolino.jpeg'
+import Misaki from '@/assets/organizers/misaki.jpg'
+import Joyce from '@/assets/organizers/joyce.jpg'
 
 const events = fetchNext(3)
 </script>
@@ -43,7 +46,40 @@ const events = fetchNext(3)
       </div>
     </section>
 
-    <section class="organizers"></section>
+    <section class="organizers">
+      <h2>Our Local Furries</h2>
+      <ul>
+        <li>
+          <a href="https://t.me/Rolino">
+            <img :src="Rolino" alt="Rolino" />
+          </a>
+          <p class="name">Rolino</p>
+          <ul>
+            <li>Stammtisch Organizer Basel</li>
+            <li>Programmer</li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://t.me/Misaki_theswisswolf">
+            <img :src="Misaki" alt="Misaki" />
+          </a>
+          <p class="name">Misaki</p>
+          <ul>
+            <li>Organizer Furmeet Laufental</li>
+            <li>IT Engineer</li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://t.me/SnugglyJoyce">
+            <img :src="Joyce" alt="Joyce" />
+          </a>
+          <p class="name">Joyce</p>
+          <ul>
+            <li>Organizer Furmeet Laufental</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
   </main>
 </template>
 
@@ -110,6 +146,54 @@ main {
 
         button {
           margin-top: 3em;
+        }
+      }
+    }
+
+    &.organizers {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      h2 {
+        font-size: 3rem;
+      }
+
+      > ul {
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-column-gap: 2em;
+        width: 60%;
+        margin: 0 auto;
+
+        li {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: start;
+
+          a {
+            width: 100%;
+
+            img {
+              width: 100%;
+              aspect-ratio: 1;
+              object-fit: cover;
+            }
+          }
+
+          .name {
+            font-weight: 500;
+            font-size: 1.5rem;
+            margin: 0.5em;
+          }
+
+          ul {
+            padding: 0;
+            margin: 0;
+          }
         }
       }
     }
