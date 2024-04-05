@@ -21,7 +21,7 @@ main {
   }
 }
 
-a {
+a:not(.button) {
   color: $accent;
   text-decoration: none;
   transition: all 300ms ease-in-out;
@@ -33,7 +33,6 @@ a {
     font-weight: 500;
   }
 }
-
 
 h1, h2, h3, h4, h5, h6, .title {
   font-family: "Inter", sans-serif;
@@ -50,7 +49,7 @@ h2 {
   }
 }
 
-button {
+button, .button {
   padding: .75em 1.5em;
   font-size: 16px;
   border: none;
@@ -58,6 +57,9 @@ button {
   background-color: $bg-color;
   border-radius: $sm-border-radius;
   cursor: pointer;
+  text-decoration: none;
+  font-family: Jost, Helvetica, Arial, sans-serif;
+  font-weight: 400;
 
   &:not(:hover) {
     box-shadow: black 0 0 10px -3px;
@@ -66,7 +68,7 @@ button {
   &:active {
     box-shadow: inset black 0 0 5px;
   }
-  
+
   // color
   @if lightness($bg-color) > 50% {
     color: black;

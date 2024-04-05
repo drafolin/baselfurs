@@ -2,7 +2,7 @@ $foreground: black;
 $background: #eee;
 $accent: #37505d;
 $border-radius: 2.25rem;
-$sm-border-radius: .5em;
+$sm-border-radius: .75em;
 
 @media screen and (prefers-color-scheme: dark) {
   $foreground: white !global;

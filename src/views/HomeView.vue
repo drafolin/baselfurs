@@ -2,8 +2,11 @@
 import MeetPic from '@/assets/meetpic.jpg'
 import EventList from '@/components/EventList.vue'
 import { fetchNext } from '@/models/events'
+import { useRouter } from 'vue-router'
 
 const events = fetchNext(3)
+
+const router = useRouter()
 </script>
 
 <template>
@@ -19,7 +22,7 @@ const events = fetchNext(3)
 
           <EventList :events="events" class="calendar" />
 
-          <button class="primary">Open Calendar</button>
+          <RouterLink class="primary button" to="/calendar">Open Calendar</RouterLink>
         </div>
       </div>
 
@@ -32,7 +35,16 @@ const events = fetchNext(3)
       </div>
     </section>
 
-    <section class="learn-more"></section>
+    <section class="learn-more">
+      <div>
+        <h2>Want to get to know the fandom better?</h2>
+        <p>
+          Then join one of our numerous chats, groups and channels and write with us! Everyone is
+          welcome!
+        </p>
+        <RouterLink class="primary button" to="/links">Links list</RouterLink>
+      </div>
+    </section>
 
     <section class="organizers"></section>
   </main>
@@ -44,7 +56,15 @@ main {
     display: flex;
     flex-direction: row;
     min-height: calc(100vh - 7rem);
-    align-items: stretch;
+    padding: 3em 0;
+
+    &:first-child {
+      padding: 0 0 3em;
+    }
+
+    &:last-child {
+      padding: 0;
+    }
 
     div.sub {
       display: flex;
@@ -59,15 +79,41 @@ main {
       padding: 1em 6.25em;
     }
 
-    .calendar-container {
-      .calendar {
-        width: 80%;
-        margin: auto;
-      }
+    &.welcome {
+      align-items: stretch;
 
-      button {
-        width: fit-content;
-        margin: 3em auto 0;
+      .calendar-container {
+        .calendar {
+          width: 80%;
+          margin: auto;
+        }
+
+        .button {
+          width: fit-content;
+          margin: 3em auto 0;
+        }
+      }
+    }
+
+    &.learn-more {
+      > div {
+        background-color: rgba($accent, 0.2);
+        width: 100%;
+        height: fit-content;
+        padding: 5em 25em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        border-radius: $sm-border-radius;
+
+        h2 {
+          font-size: 2.5rem;
+        }
+
+        button {
+          margin-top: 3em;
+        }
       }
     }
   }
