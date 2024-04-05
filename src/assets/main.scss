@@ -6,6 +6,7 @@
   --foreground: black;
   --background: #eee;
   --accent: #37505d;
+  --border-radius: 2.25rem;
 
   @media screen and (prefers-color-scheme: dark) {
     --foreground: white;
@@ -18,18 +19,27 @@ body {
   color: var(--foreground);
   background-color: var(--background);
   font-family: Jost, Helvetica, Arial, sans-serif;
+  font-weight: 300;
   margin: 0;
 }
 
 main {
-  padding-top: 8rem;
+  width: 100vw;
+  padding: 8rem 6.5rem 0;
+
+  img {
+    border-radius: var(--border-radius);
+  }
 }
 
 a {
   color: var(--accent);
   text-decoration: none;
+  transition: all 300ms ease-in-out;
+  font-weight: 400;
 
   &:hover {
+    color: color-mix(in srgb, var(--accent) 75%, var(--foreground) 25%);
     text-decoration: underline;
   }
 }
@@ -40,4 +50,5 @@ h1 {
 
 h1, h2, h3, h4, h5, h6, .title {
   font-family: "Inter", sans-serif;
+  font-weight: 200;
 }
