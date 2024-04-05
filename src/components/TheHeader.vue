@@ -27,7 +27,7 @@ const { width } = useWindowSize()
 <style lang="scss" scoped>
 header {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr;
   justify-items: center;
   align-items: center;
   padding: 0.25rem 1.75em;
@@ -37,6 +37,10 @@ header {
   height: 5rem;
   background-color: var(--background);
   z-index: 10;
+
+  @media screen and (max-width: 660px) {
+    grid-template-columns: 1fr 3fr 1fr;
+  }
 
   :first-child {
     justify-self: start;
