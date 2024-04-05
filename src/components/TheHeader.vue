@@ -1,9 +1,6 @@
 <script lang="ts" setup>
 import Icon from '@/assets/icon-192x192.png'
-import { useWindowSize } from '@vueuse/core'
 import TheMenu from '@/components/TheMenu.vue'
-
-const { width } = useWindowSize()
 </script>
 
 <template>
@@ -12,15 +9,7 @@ const { width } = useWindowSize()
       <img :src="Icon" alt="Basel Furs" class="icon" />
     </RouterLink>
     <span class="title">Basel Furs</span>
-    <nav v-if="width > 660">
-      <ul>
-        <li>
-          <RouterLink to="/">Home</RouterLink>
-        </li>
-      </ul>
-    </nav>
-
-    <TheMenu v-else />
+    <TheMenu />
   </header>
 </template>
 

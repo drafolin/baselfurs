@@ -1,6 +1,7 @@
 * {
   --foreground: black;
-  --background: #eee;
+  --background-rgb: 238, 238, 238;
+  --background: rgb(var(--background-rgb));
   --accent-rgb: 55, 80, 93;
   --accent: rgb(var(--accent-rgb));
   --border-radius: 2.25rem;
