@@ -185,12 +185,16 @@ main {
           width: min(80vw, 20rem);
         }
 
-        li {
+        > li {
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: start;
           padding: 0.25em 0;
+
+          @media screen and (max-width: 1024px) {
+            padding: 1.5em 0;
+          }
 
           a {
             width: 100%;
@@ -211,6 +215,8 @@ main {
           ul {
             padding: 0;
             margin: 0;
+
+            list-style: none;
           }
         }
       }
