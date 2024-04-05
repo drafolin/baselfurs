@@ -30,7 +30,7 @@ header {
   position: fixed;
   width: 100vw;
   height: 5rem;
-  background-color: $background;
+  background-color: var(--background);
   z-index: 10;
 
   :first-child {

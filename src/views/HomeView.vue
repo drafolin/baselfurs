@@ -97,7 +97,7 @@ main {
 
     &.learn-more {
       > div {
-        background-color: rgba($accent, 0.2);
+        background-color: rgba(var(--accent-rgb), 0.1);
         width: 100%;
         height: fit-content;
         padding: 5em 25em;
@@ -105,7 +105,7 @@ main {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        border-radius: $sm-border-radius;
+        border-radius: var(--sm-border-radius);
 
         h2 {
           font-size: 2.5rem;

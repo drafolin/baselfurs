@@ -67,7 +67,7 @@ ul {
       padding: 0.25em 1.5em;
 
       &.featured {
-        border-left: 2px solid $accent;
+        border-left: 2px solid var(--accent);
       }
 
       > .date {
