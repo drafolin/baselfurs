@@ -1,0 +1,13 @@
+$foreground: black;
+$background: #eee;
+$accent: #37505d;
+$border-radius: 2.25rem;
+$sm-border-radius: .5em;
+
+@media screen and (prefers-color-scheme: dark) {
+  $foreground: white !global;
+  $background: #333 !global;
+  $accent: #56a7d3 !global;
+}
+
+$primary: mix($accent, $background, 75%);

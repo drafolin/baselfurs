@@ -1,16 +1,15 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { RouterView } from 'vue-router'
-import TheHeader from "@/components/TheHeader.vue";
-import TheFooter from "@/components/TheFooter.vue";
+import TheHeader from '@/components/TheHeader.vue'
+import TheFooter from '@/components/TheFooter.vue'
 </script>
 
 <template>
-  <TheHeader/>
+  <TheHeader />
 
   <RouterView />
 
-  <TheFooter/>
+  <TheFooter />
 </template>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

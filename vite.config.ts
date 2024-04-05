@@ -7,11 +7,14 @@ import VueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-    vueJsx(),
-    VueDevTools(),
-  ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@use "@/assets/consts" as *;\n'
+      }
+    }
+  },
+  plugins: [vue(), vueJsx(), VueDevTools()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
