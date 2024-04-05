@@ -1,0 +1,120 @@
+<script lang="ts" setup>
+import { ref, type VNodeRef } from 'vue'
+import { useCssVar, useWindowSize } from '@vueuse/core'
+
+const { width } = useWindowSize()
+const el = ref<VNodeRef | null>(null)
+const textColor = useCssVar('--foreground', el)
+const deployed = ref<boolean>(false)
+
+type Link = {
+  url: string
+  name: string
+}
+
+const links: Link[] = [
+  {
+    name: 'Home',
+    url: '/'
+  }
+]
+</script>
+
+<template>
+  <nav v-if="width > 660">
+    <ul>
+      <li v-for="link in links" :key="link.url">
+        <RouterLink :to="link.url">{{ link.name }}</RouterLink>
+      </li>
+    </ul>
+  </nav>
+
+  <div v-else>
+    <svg
+      :ref="el"
+      viewBox="0 0 30 40"
+      xmlns="http://www.w3.org/2000/svg"
+      @click.capture="deployed = !deployed"
+    >
+      <line :stroke="textColor" x1="0" x2="30" y1="10" y2="10" />
+      <line :stroke="textColor" x1="0" x2="30" y1="20" y2="20" />
+      <line :stroke="textColor" x1="0" x2="30" y1="30" y2="30" />
+    </svg>
+
+    <Transition>
+      <ul v-if="deployed" class="menu">
+        <li v-for="link in links" :key="link.url">
+          <RouterLink :to="link.url">{{ link.name }}</RouterLink>
+        </li>
+      </ul>
+    </Transition>
+
+    <Transition>
+      <div v-if="deployed" class="body-overlay" />
+    </Transition>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+svg {
+  width: 30px;
+}
+
+.menu {
+  position: fixed;
+  top: 5rem;
+  bottom: 0;
+  width: fit-content;
+  min-width: 40vw;
+  right: 0;
+  background-color: var(--background);
+  box-shadow:
+    rgba(0, 0, 0, 0.5) 0 5px 5px,
+    inset rgba(0, 0, 0, 0.5) 0 10px 5px -5px;
+  z-index: 8;
+  padding: 2rem;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin: 0;
+
+  &.v-enter-active,
+  &.v-leave-active {
+    transition: all 0.5s ease;
+  }
+
+  &.v-enter-from,
+  &.v-leave-to {
+    right: -100vw;
+  }
+
+  li {
+    a {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+.body-overlay {
+  position: fixed;
+  z-index: 7;
+  top: 5rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 1;
+
+  &.v-enter-active,
+  &.v-leave-active {
+    transition: opacity 0.5s ease;
+  }
+
+  &.v-enter-from,
+  &.v-leave-to {
+    opacity: 0;
+  }
+}
+</style>

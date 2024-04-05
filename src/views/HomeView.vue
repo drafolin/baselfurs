@@ -109,18 +109,25 @@ main {
     }
 
     > div.sub {
-      padding: 1em 6.25em;
+      padding: 1em min(6.5rem, 8vw);
+
+      @media screen and (max-width: 660px) {
+        padding: 1em;
+      }
     }
 
     &.welcome {
       align-items: stretch;
 
-      .calendar-container {
-        .calendar {
-          width: 80%;
-          margin: auto;
-        }
+      @media screen and (max-width: 1024px) {
+        flex-direction: column;
+      }
 
+      h1 {
+        margin-top: 0;
+      }
+
+      .calendar-container {
         .button {
           width: fit-content;
           margin: 3em auto 0;
@@ -133,7 +140,7 @@ main {
         background-color: rgba(var(--accent-rgb), 0.1);
         width: 100%;
         height: fit-content;
-        padding: 5em 25em;
+        padding: 5em 20vw;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -142,6 +149,10 @@ main {
 
         h2 {
           font-size: 2.5rem;
+
+          @media screen and (max-width: 1024px) {
+            font-size: 1.5rem;
+          }
         }
 
         button {
@@ -167,12 +178,23 @@ main {
         grid-column-gap: 2em;
         width: 60%;
         margin: 0 auto;
+        padding: 0;
 
-        li {
+        @media screen and (max-width: 1024px) {
+          grid-template-columns: 1fr;
+          width: min(80vw, 20rem);
+        }
+
+        > li {
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: start;
+          padding: 0.25em 0;
+
+          @media screen and (max-width: 1024px) {
+            padding: 1.5em 0;
+          }
 
           a {
             width: 100%;
@@ -193,6 +215,8 @@ main {
           ul {
             padding: 0;
             margin: 0;
+
+            list-style: none;
           }
         }
       }
@@ -203,11 +227,20 @@ main {
 div.pic {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-}
+  margin-top: 2rem;
 
-.meet-pic {
-  width: 30em;
+  .meet-pic {
+    width: 30vw;
+
+    @media screen and (max-width: 1024px) {
+      width: 60vw;
+    }
+
+    @media screen and (max-width: 660px) {
+      width: 80vw;
+    }
+  }
 }
 </style>

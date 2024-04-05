@@ -14,7 +14,11 @@ body {
 
 main {
   width: 100vw;
-  padding: 7rem 6.5rem 0;
+  padding: 7rem min(6.5rem, 8vw) 0;
+
+  @media screen and (max-width: 660px) {
+    padding: 7rem 1em 0;
+  }
 
   img {
     border-radius: var(--border-radius);

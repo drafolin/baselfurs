@@ -9,7 +9,8 @@ const props = defineProps<{
 
 <template>
   <ul>
-    <template v-for="event in props.events" :key="event.dateFrom.valueOf() + event.name">
+    <template v-for="(event, index) in props.events" :key="event.dateFrom.valueOf() + event.name">
+      <hr v-if="index !== 0" />
       <li>
         <div :class="event.featured ? 'featured' : ''">
           <div class="date">
@@ -45,7 +46,6 @@ const props = defineProps<{
           </div>
         </div>
       </li>
-      <hr />
     </template>
   </ul>
 </template>
@@ -53,8 +53,26 @@ const props = defineProps<{
 <style lang="scss" scoped>
 ul {
   list-style: none;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
+  width: fit-content;
+  display: flex;
+  align-items: stretch;
+  min-width: 25em;
+  flex-direction: column;
+
+  @media screen and (max-width: 660px) {
+    min-width: unset;
+  }
+
+  hr {
+    width: 60%;
+    margin: 0.5em auto;
+
+    @media screen and (max-width: 660px) {
+      width: 80%;
+    }
+  }
 
   li {
     margin: 0.5em 0;
@@ -105,11 +123,6 @@ ul {
         }
       }
     }
-  }
-
-  hr {
-    width: 60%;
-    margin: 0.5em auto;
   }
 }
 </style>

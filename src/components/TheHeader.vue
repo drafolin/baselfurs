@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import Icon from '@/assets/icon-192x192.png'
+import TheMenu from '@/components/TheMenu.vue'
 </script>
 
 <template>
@@ -8,21 +9,14 @@ import Icon from '@/assets/icon-192x192.png'
       <img :src="Icon" alt="Basel Furs" class="icon" />
     </RouterLink>
     <span class="title">Basel Furs</span>
-    <nav>
-      <ul>
-        <li>
-          <RouterLink to="/">Home</RouterLink>
-        </li>
-        <li></li>
-      </ul>
-    </nav>
+    <TheMenu />
   </header>
 </template>
 
 <style lang="scss" scoped>
 header {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr;
   justify-items: center;
   align-items: center;
   padding: 0.25rem 1.75em;
@@ -32,6 +26,10 @@ header {
   height: 5rem;
   background-color: var(--background);
   z-index: 10;
+
+  @media screen and (max-width: 660px) {
+    grid-template-columns: 1fr 3fr 1fr;
+  }
 
   :first-child {
     justify-self: start;
@@ -43,10 +41,19 @@ header {
 
   .icon {
     height: 3rem;
+
+    @media screen and (max-width: 660px) {
+      height: auto;
+      width: 2.5rem;
+    }
   }
 
   span.title {
     font-size: 2.5rem;
+
+    @media screen and (max-width: 660px) {
+      font-size: 1.5rem;
+    }
   }
 
   nav {
