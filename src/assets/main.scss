@@ -2,34 +2,70 @@
 
 * {
   box-sizing: border-box;
-
-  --foreground: black;
-  --background: #eee;
-  --accent: #37505d;
-
-  @media screen and (prefers-color-scheme: dark) {
-    --foreground: white;
-    --background: #333;
-    --accent: #56a7d3;
-  }
 }
 
 body {
   color: var(--foreground);
   background-color: var(--background);
   font-family: Jost, Helvetica, Arial, sans-serif;
+  font-weight: 300;
   margin: 0;
 }
 
 main {
-  padding-top: 8rem;
+  width: 100vw;
+  padding: 7rem 6.5rem 0;
+
+  img {
+    border-radius: var(--border-radius);
+  }
 }
 
-a {
+a:not(.button) {
   color: var(--accent);
   text-decoration: none;
+  transition: all 300ms ease-in-out;
+  font-weight: 400;
 
   &:hover {
+    color: color-mix(in srgb, var(--accent) 75%, var(--foreground) 25%);
     text-decoration: underline;
+    font-weight: 500;
+  }
+}
+
+h1, h2, h3, h4, h5, h6, .title {
+  font-family: "Inter", sans-serif;
+  font-weight: 200;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+button, .button {
+  padding: .75em 1.5em;
+  font-size: 16px;
+  border: none;
+  background-color: var(--primary);
+  border-radius: var(--sm-border-radius);
+  cursor: pointer;
+  text-decoration: none;
+  font-family: Jost, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  color: #eee;
+
+  &:not(:hover) {
+    box-shadow: black 0 0 10px -3px;
+  }
+
+  &:active {
+    box-shadow: inset black 0 0 5px;
   }
 }

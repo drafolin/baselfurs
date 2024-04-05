@@ -1,0 +1,15 @@
+* {
+  --foreground: black;
+  --background: #eee;
+  --accent-rgb: 55, 80, 93;
+  --accent: rgb(var(--accent-rgb));
+  --border-radius: 2.25rem;
+  --sm-border-radius: .75em;
+  --primary: color-mix(in srgb, var(--accent) 75%, var(--background) 75%);
+
+  @media screen and (prefers-color-scheme: dark) {
+    --foreground: white;
+    --background: #333;
+    --accent-rgb: 86, 167, 211;
+  }
+}
