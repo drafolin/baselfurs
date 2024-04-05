@@ -2,11 +2,8 @@
 import MeetPic from '@/assets/meetpic.jpg'
 import EventList from '@/components/EventList.vue'
 import { fetchNext } from '@/models/events'
-import { useRouter } from 'vue-router'
 
 const events = fetchNext(3)
-
-const router = useRouter()
 </script>
 
 <template>
