@@ -60,6 +60,28 @@ svg {
   width: 30px;
 }
 
+nav {
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+
+    li {
+      padding: 0;
+      margin: 0;
+      transition: all 300ms ease-in-out;
+
+      a {
+        font-size: 1.5em;
+      }
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
 .menu {
   position: fixed;
   top: 5rem;
