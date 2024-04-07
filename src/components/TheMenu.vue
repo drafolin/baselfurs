@@ -16,6 +16,10 @@ const links: Link[] = [
   {
     name: 'Home',
     url: '/'
+  },
+  {
+    name: 'Links',
+    url: '/links'
   }
 ]
 </script>
@@ -44,13 +48,13 @@ const links: Link[] = [
     <Transition>
       <ul v-if="deployed" class="menu">
         <li v-for="link in links" :key="link.url">
-          <RouterLink :to="link.url">{{ link.name }}</RouterLink>
+          <RouterLink :to="link.url" @click="deployed = false">{{ link.name }}</RouterLink>
         </li>
       </ul>
     </Transition>
 
     <Transition>
-      <div v-if="deployed" class="body-overlay" />
+      <div v-if="deployed" class="body-overlay" @click="deployed = false" />
     </Transition>
   </div>
 </template>
@@ -67,7 +71,7 @@ nav {
     flex-direction: row;
 
     li {
-      padding: 0;
+      padding: 0 0.5em;
       margin: 0;
       transition: all 300ms ease-in-out;
 
@@ -87,7 +91,7 @@ nav {
   top: 5rem;
   bottom: 0;
   width: fit-content;
-  min-width: 40vw;
+  min-width: 70vw;
   right: 0;
   background-color: var(--background);
   box-shadow:
@@ -113,6 +117,8 @@ nav {
   }
 
   li {
+    padding: 0.75em 0;
+
     a {
       font-size: 1.3rem;
     }
