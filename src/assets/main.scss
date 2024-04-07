@@ -32,9 +32,8 @@ a:not(.button) {
   font-weight: 400;
 
   &:hover {
-    color: color-mix(in srgb, var(--accent) 75%, var(--foreground) 25%);
+    color: color-mix(in srgb, var(--accent) 50%, var(--foreground) 50%);
     text-decoration: underline;
-    font-weight: 500;
   }
 }
 

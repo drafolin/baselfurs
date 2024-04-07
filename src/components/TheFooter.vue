@@ -119,7 +119,9 @@ footer {
       justify-content: space-between;
       flex-wrap: wrap;
 
-      div {
+      > div {
+        padding: 0 0.5em;
+
         h2 {
           margin: 0;
           padding: 0.5em 0;
