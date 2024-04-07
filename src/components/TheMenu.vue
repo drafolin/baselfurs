@@ -16,6 +16,10 @@ const links: Link[] = [
   {
     name: 'Home',
     url: '/'
+  },
+  {
+    name: 'Links',
+    url: '/links'
   }
 ]
 </script>
@@ -36,21 +40,42 @@ const links: Link[] = [
       xmlns="http://www.w3.org/2000/svg"
       @click.capture="deployed = !deployed"
     >
-      <line :stroke="textColor" x1="0" x2="30" y1="10" y2="10" />
-      <line :stroke="textColor" x1="0" x2="30" y1="20" y2="20" />
-      <line :stroke="textColor" x1="0" x2="30" y1="30" y2="30" />
+      <line
+        :class="deployed ? 'animation-to' : ''"
+        :stroke="textColor"
+        x1="0"
+        x2="30"
+        y1="20"
+        y2="20"
+      />
+      <line
+        :class="deployed ? 'animation-to' : ''"
+        :stroke="textColor"
+        x1="0"
+        x2="30"
+        y1="20"
+        y2="20"
+      />
+      <line
+        :class="deployed ? 'animation-to' : ''"
+        :stroke="textColor"
+        x1="0"
+        x2="30"
+        y1="20"
+        y2="20"
+      />
     </svg>
 
     <Transition>
       <ul v-if="deployed" class="menu">
         <li v-for="link in links" :key="link.url">
-          <RouterLink :to="link.url">{{ link.name }}</RouterLink>
+          <RouterLink :to="link.url" @click="deployed = false">{{ link.name }}</RouterLink>
         </li>
       </ul>
     </Transition>
 
     <Transition>
-      <div v-if="deployed" class="body-overlay" />
+      <div v-if="deployed" class="body-overlay" @click="deployed = false" />
     </Transition>
   </div>
 </template>
@@ -60,12 +85,122 @@ svg {
   width: 30px;
 }
 
+nav {
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+
+    li {
+      padding: 0 0.5em;
+      margin: 0;
+      transition: all 300ms ease-in-out;
+
+      a {
+        font-size: 1.5em;
+      }
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+@keyframes activate-1 {
+  from {
+    transform: rotate(0) translateY(-10px);
+  }
+  50% {
+    transform: rotate(0) translateY(0);
+  }
+  to {
+    transform: rotate(45deg) translateY(0);
+  }
+}
+
+@keyframes deactivate-1 {
+  from {
+    transform: rotate(45deg) translateY(0);
+  }
+  50% {
+    transform: rotate(0) translateY(0);
+  }
+  to {
+    transform: rotate(0) translateY(-10px);
+  }
+}
+
+@keyframes activate-2 {
+  from {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes deactivate-2 {
+  from {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes activate-3 {
+  from {
+    transform: rotate(0deg) translateY(10px);
+  }
+  50% {
+    transform: rotate(0deg) translateY(0);
+  }
+  to {
+    transform: rotate(-45deg) translateY(0);
+  }
+}
+
+@keyframes deactivate-3 {
+  from {
+    transform: rotate(-45deg) translateY(0);
+  }
+  50% {
+    transform: rotate(0) translateY(0);
+  }
+  to {
+    transform: rotate(0) translateY(10px);
+  }
+}
+
+svg {
+  line {
+    transform-origin: center;
+
+    @for $i from 1 through 3 {
+      &:nth-child(#{$i}) {
+        animation: deactivate-#{$i} 500ms both;
+
+        &.animation-to {
+          animation: activate-#{$i} 500ms both;
+        }
+      }
+    }
+  }
+}
+
 .menu {
   position: fixed;
   top: 5rem;
   bottom: 0;
   width: fit-content;
-  min-width: 40vw;
+  min-width: 70vw;
   right: 0;
   background-color: var(--background);
   box-shadow:
@@ -91,6 +226,8 @@ svg {
   }
 
   li {
+    padding: 0.75em 0;
+
     a {
       font-size: 1.3rem;
     }
