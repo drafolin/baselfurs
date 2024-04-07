@@ -40,9 +40,30 @@ const links: Link[] = [
       xmlns="http://www.w3.org/2000/svg"
       @click.capture="deployed = !deployed"
     >
-      <line :stroke="textColor" x1="0" x2="30" y1="10" y2="10" />
-      <line :stroke="textColor" x1="0" x2="30" y1="20" y2="20" />
-      <line :stroke="textColor" x1="0" x2="30" y1="30" y2="30" />
+      <line
+        :class="deployed ? 'animation-to' : ''"
+        :stroke="textColor"
+        x1="0"
+        x2="30"
+        y1="20"
+        y2="20"
+      />
+      <line
+        :class="deployed ? 'animation-to' : ''"
+        :stroke="textColor"
+        x1="0"
+        x2="30"
+        y1="20"
+        y2="20"
+      />
+      <line
+        :class="deployed ? 'animation-to' : ''"
+        :stroke="textColor"
+        x1="0"
+        x2="30"
+        y1="20"
+        y2="20"
+      />
     </svg>
 
     <Transition>
@@ -81,6 +102,94 @@ nav {
 
       &:hover {
         transform: scale(1.2);
+      }
+    }
+  }
+}
+
+@keyframes activate-1 {
+  from {
+    transform: rotate(0) translateY(-10px);
+  }
+  50% {
+    transform: rotate(0) translateY(0);
+  }
+  to {
+    transform: rotate(45deg) translateY(0);
+  }
+}
+
+@keyframes deactivate-1 {
+  from {
+    transform: rotate(45deg) translateY(0);
+  }
+  50% {
+    transform: rotate(0) translateY(0);
+  }
+  to {
+    transform: rotate(0) translateY(-10px);
+  }
+}
+
+@keyframes activate-2 {
+  from {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes deactivate-2 {
+  from {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes activate-3 {
+  from {
+    transform: rotate(0deg) translateY(10px);
+  }
+  50% {
+    transform: rotate(0deg) translateY(0);
+  }
+  to {
+    transform: rotate(-45deg) translateY(0);
+  }
+}
+
+@keyframes deactivate-3 {
+  from {
+    transform: rotate(-45deg) translateY(0);
+  }
+  50% {
+    transform: rotate(0) translateY(0);
+  }
+  to {
+    transform: rotate(0) translateY(10px);
+  }
+}
+
+svg {
+  line {
+    transform-origin: center;
+
+    @for $i from 1 through 3 {
+      &:nth-child(#{$i}) {
+        animation: deactivate-#{$i} 500ms both;
+
+        &.animation-to {
+          animation: activate-#{$i} 500ms both;
+        }
       }
     }
   }
