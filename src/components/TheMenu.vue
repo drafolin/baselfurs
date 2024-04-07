@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { ref, type VNodeRef } from 'vue'
-import { useCssVar, useWindowSize } from '@vueuse/core'
+import { ref } from 'vue'
+import { usePreferredColorScheme, useWindowSize } from '@vueuse/core'
 
 const { width } = useWindowSize()
-const el = ref<VNodeRef | null>(null)
-const textColor = useCssVar('--foreground', el)
+const textColor = usePreferredColorScheme().value === 'dark' ? 'white' : 'black'
 const deployed = ref<boolean>(false)
 
 type Link = {
@@ -33,9 +32,8 @@ const links: Link[] = [
     </ul>
   </nav>
 
-  <div v-else>
+  <template v-else>
     <svg
-      :ref="el"
       viewBox="0 0 30 40"
       xmlns="http://www.w3.org/2000/svg"
       @click.capture="deployed = !deployed"
@@ -66,22 +64,24 @@ const links: Link[] = [
       />
     </svg>
 
-    <Transition>
-      <nav v-if="deployed" class="menu">
-        <ul>
-          <li v-for="link in links" :key="link.url">
-            <RouterLink :to="link.url" @click="deployed = false">{{ link.name }}</RouterLink>
-          </li>
-        </ul>
+    <Teleport to="body">
+      <Transition>
+        <nav v-if="deployed" class="menu">
+          <ul>
+            <li v-for="link in links" :key="link.url">
+              <RouterLink :to="link.url" @click="deployed = false">{{ link.name }}</RouterLink>
+            </li>
+          </ul>
 
-        <a class="button" href="https://t.me/+6HzWgZE399tkMTVk">Telegram Chat</a>
-      </nav>
-    </Transition>
+          <a class="button" href="https://t.me/+6HzWgZE399tkMTVk">Telegram Chat</a>
+        </nav>
+      </Transition>
 
-    <Transition>
-      <div v-if="deployed" class="body-overlay" @click="deployed = false" />
-    </Transition>
-  </div>
+      <Transition>
+        <div v-if="deployed" class="body-overlay" @click="deployed = false" />
+      </Transition>
+    </Teleport>
+  </template>
 </template>
 
 <style lang="scss" scoped>
