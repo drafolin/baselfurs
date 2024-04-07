@@ -25,7 +25,7 @@ const links: Link[] = [
 </script>
 
 <template>
-  <nav v-if="width > 660">
+  <nav v-if="width > 660" class="desktop">
     <ul>
       <li v-for="link in links" :key="link.url">
         <RouterLink :to="link.url">{{ link.name }}</RouterLink>
@@ -67,11 +67,15 @@ const links: Link[] = [
     </svg>
 
     <Transition>
-      <ul v-if="deployed" class="menu">
-        <li v-for="link in links" :key="link.url">
-          <RouterLink :to="link.url" @click="deployed = false">{{ link.name }}</RouterLink>
-        </li>
-      </ul>
+      <nav v-if="deployed" class="menu">
+        <ul>
+          <li v-for="link in links" :key="link.url">
+            <RouterLink :to="link.url" @click="deployed = false">{{ link.name }}</RouterLink>
+          </li>
+        </ul>
+
+        <a class="button" href="https://t.me/+6HzWgZE399tkMTVk">Telegram Chat</a>
+      </nav>
     </Transition>
 
     <Transition>
@@ -85,7 +89,7 @@ svg {
   width: 30px;
 }
 
-nav {
+nav.desktop {
   ul {
     list-style: none;
     display: flex;
@@ -208,12 +212,11 @@ svg {
     inset rgba(0, 0, 0, 0.5) 0 10px 5px -5px;
   z-index: 8;
   padding: 2rem;
-  list-style: none;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  margin: 0;
+  justify-content: space-between;
+  align-items: stretch;
 
   &.v-enter-active,
   &.v-leave-active {
@@ -225,12 +228,26 @@ svg {
     right: -100vw;
   }
 
-  li {
-    padding: 0.75em 0;
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    margin: 0;
+    padding: 0;
 
-    a {
-      font-size: 1.3rem;
+    li {
+      padding: 0.75em 0;
+
+      a {
+        font-size: 1.3rem;
+      }
     }
+  }
+
+  > a {
+    text-align: center;
   }
 }
 
