@@ -209,7 +209,7 @@ main {
           .name {
             font-weight: 500;
             font-size: 1.5rem;
-            margin: 0.5em;
+            margin: 0.25em 0 0;
           }
 
           ul {
