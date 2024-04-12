@@ -20,7 +20,7 @@ header {
   justify-items: center;
   align-items: center;
   padding: 0.25rem 1.75em;
-  box-shadow: black 0 0 10px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 0 10px;
   position: fixed;
   width: 100vw;
   height: 5rem;
