@@ -73,7 +73,8 @@ footer {
   padding: 100px;
 
   @media screen and (max-width: 660px) {
-    padding: 4em;
+    padding: 1rem;
+    margin-top: 3rem;
   }
 
   section {
@@ -104,7 +105,6 @@ footer {
 
       @media screen and (max-width: 660px) {
         width: 100%;
-        margin-bottom: 4em;
       }
 
       img {
@@ -118,6 +118,10 @@ footer {
       width: 100%;
       justify-content: space-between;
       flex-wrap: wrap;
+
+      @media screen and (max-width: 660px) {
+        flex-direction: column;
+      }
 
       > div {
         padding: 0 0.5em;
