@@ -16,7 +16,7 @@ import TheMenu from '@/components/TheMenu.vue'
 <style lang="scss" scoped>
 header {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr auto 1fr;
   justify-items: center;
   align-items: center;
   padding: 0.25rem 1.75em;
