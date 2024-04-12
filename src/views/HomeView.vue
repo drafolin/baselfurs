@@ -136,6 +136,8 @@ main {
     }
 
     &.learn-more {
+      align-items: center;
+
       > div {
         background-color: rgba(var(--accent-rgb), 0.1);
         width: 100%;
@@ -166,6 +168,7 @@ main {
       flex-direction: column;
       align-items: center;
       text-align: center;
+      justify-content: center;
 
       h2 {
         font-size: 3rem;
