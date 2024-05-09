@@ -1,5 +1,6 @@
 * {
-  --foreground: black;
+  --foreground-rgb: 0, 0, 0;
+  --foreground: rgb(var(--foreground-rgb));
   --background-rgb: 238, 238, 238;
   --background: rgb(var(--background-rgb));
   --accent-rgb: 55, 80, 93;
@@ -9,7 +10,7 @@
   --primary: color-mix(in srgb, var(--accent) 75%, var(--background) 75%);
 
   @media screen and (prefers-color-scheme: dark) {
-    --foreground: white;
+    --foreground-rgb: 255, 255, 255;
     --background: #333;
     --accent-rgb: 86, 167, 211;
   }

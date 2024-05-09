@@ -10,6 +10,10 @@ const router = createRouter({
     {
       path: '/links',
       component: () => import('@/views/LinksView.vue')
+    },
+    {
+      path: '/calendar',
+      component: () => import('@/views/CalendarView.vue')
     }
   ]
 })
