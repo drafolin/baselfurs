@@ -41,7 +41,14 @@ while ((datePointer.getMonth() <= new Date().getMonth()) || (datePointer.getDay(
         <div class="date">{{ day[0].getDate() }}</div>
         <ul class="day-events">
           <li v-for="dayEvent in day[1].dayEvents">
-
+            <div :class="[
+              isOnSameDay(dayEvent.dateFrom, day[0]) && 'event-start',
+              dayEvent.dateTo && isOnSameDay(dayEvent.dateTo, day[0]) && 'event-end'
+            ]">
+              <span v-if="isOnSameDay(dayEvent.dateFrom, day[0])">
+                {{ dayEvent.name }}
+              </span>
+            </div>
           </li>
         </ul>
         <ul class="time-events">
@@ -55,7 +62,6 @@ while ((datePointer.getMonth() <= new Date().getMonth()) || (datePointer.getDay(
                     hour: "2-digit",
                     minute: "2-digit"
                   })
-
                 }}
               </span>
               <template v-if="timeEvent.dateTo">
@@ -89,7 +95,6 @@ while ((datePointer.getMonth() <= new Date().getMonth()) || (datePointer.getDay(
 
   >li {
     min-height: 168px;
-    padding: .5em;
     box-shadow: 0 0 0 1px rgba(var(--foreground-rgb), .05);
     transition: box-shadow 300ms ease-in-out;
 
@@ -99,6 +104,12 @@ while ((datePointer.getMonth() <= new Date().getMonth()) || (datePointer.getDay(
 
     &.other-month {
       opacity: .2;
+    }
+
+    .date {
+      font-size: 1.5rem;
+      padding: .25em;
+      font-weight: bold;
     }
 
     >ul {
@@ -128,6 +139,35 @@ while ((datePointer.getMonth() <= new Date().getMonth()) || (datePointer.getDay(
 
         >.name {
           font-size: 12px;
+        }
+      }
+
+      &.day-events {
+        >li {
+          padding: 0;
+          margin: 0;
+
+          div {
+            background-color: lightgray;
+            height: 1.5em;
+            margin: .25em 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            font-size: 12px;
+
+            &.event-start {
+              border-top-left-radius: .5em;
+              border-bottom-left-radius: .5em;
+              padding-left: .5em;
+            }
+
+            &.event-end {
+              border-top-right-radius: .5em;
+              border-bottom-right-radius: .5em;
+            }
+          }
         }
       }
     }

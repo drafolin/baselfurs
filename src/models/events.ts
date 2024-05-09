@@ -44,13 +44,15 @@ export const fetchNext = (max?: number): Event[] => {
   ].slice(0, defMax)
 }
 
-export const fetchOn = (day: Date): Event[] => {
-  const yesterday = new Date(day);
+export const fetchOn = (d: Date): Event[] => {
+  const yesterday = new Date(d);
   yesterday.setDate(yesterday.getDate() - 1)
 
 
-  const tomorrow = new Date(day);
+  const tomorrow = new Date(d);
   tomorrow.setDate(tomorrow.getDate() + 1)
+
+  const day = new Date(d);
 
   return [
     {
@@ -68,19 +70,19 @@ export const fetchOn = (day: Date): Event[] => {
     {
       dateFrom: yesterday,
       dateTo: day,
-      name: 'Basler Stammtisch – June',
+      name: 'Basler Stammtisch',
       featured: true
     },
     {
       dateFrom: yesterday,
       dateTo: tomorrow,
-      name: 'Basler Stammtisch – April',
+      name: 'Basler Stammtisch',
       featured: true
     },
     {
       dateFrom: day,
       dateTo: tomorrow,
-      name: 'Basler Stammtisch – April',
+      name: 'Basler Stammtisch',
       featured: true
     }
   ]
