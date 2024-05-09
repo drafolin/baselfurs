@@ -1,16 +1,28 @@
 <script setup lang="ts">
+import { fetchOn } from '@/models/events';
+import { isOnSameDay } from '@/models/utils';
+
 let datePointer = new Date()
 datePointer.setDate(1)
 while (datePointer.getDay() !== 1) {
   datePointer.setDate(datePointer.getDate() - 1)
 }
 console.log(datePointer)
-const days = new Map<Date, any[]>();
+const days = new Map<Date, { dayEvents: any[], timeEvents: any[] }>();
 while (datePointer.getMonth() <= new Date().getMonth() || datePointer.getDay() !== 1) {
-  days.set(new Date(datePointer), [])
+  const events = datePointer.getDate() === 12 ? fetchOn(datePointer) : []
+  days.set(new Date(datePointer), {
+    dayEvents: events.filter(v =>
+      !isOnSameDay(v.dateFrom, datePointer) ||
+      (v.dateTo ? !isOnSameDay(v.dateTo!, datePointer) : false)
+    ),
+    timeEvents: events.filter(v =>
+      isOnSameDay(v.dateFrom, datePointer) &&
+      (v.dateTo ? isOnSameDay(v.dateTo, datePointer) : true)
+    )
+  })
   datePointer.setDate(datePointer.getDate() + 1)
 }
-
 </script>
 
 <template>
@@ -21,7 +33,9 @@ while (datePointer.getMonth() <= new Date().getMonth() || datePointer.getDay() !
         :class="day[0].getMonth() === new Date().getMonth() ? 'current-month' : 'other-month'">
         <div class="date">{{ day[0].getDate() }}</div>
         <ul class="dayEvents"></ul>
-        <ul class="timeEvents"></ul>
+        <ul class="timeEvents">
+          <li v-for"event in day[1]"></li>
+        </ul>
       </li>
     </ul>
   </main>
