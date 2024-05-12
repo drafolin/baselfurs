@@ -1,89 +1,66 @@
 export type Event = {
-  dateFrom: Date
-  dateTo?: Date
-  name: string
-  link?: string
-  featured?: boolean
+  start: Date,
+  end: Date,
+  title: string
+  url?: string
 }
 
-export const fetchNext = (max?: number): Event[] => {
+export const fetchNext = async (max?: number): Promise<Event[]> => {
   const defMax = max ?? 3
 
   return [
     {
-      dateFrom: new Date('2024-04-13T17:00'),
-      dateTo: new Date('2024-04-13T22:00'),
-      name: 'Basler Stammtisch – April',
-      featured: true
+      start: new Date('2024-04-13T17:00'),
+      end: new Date('2024-04-13T22:00'),
+      title: 'Basler Stammtisch – April',
     },
 
     {
-      dateFrom: new Date('2024-05-13T17:00'),
-      dateTo: new Date('2024-05-13T22:00'),
-      name: 'Basler Stammtisch – Mai'
+      start: new Date('2024-05-13T17:00'),
+      end: new Date('2024-05-13T22:00'),
+      title: 'Basler Stammtisch – Mai',
     },
 
     {
-      dateFrom: new Date('2024-06-13T17:00'),
-      dateTo: new Date('2024-06-13T22:00'),
-      name: 'Basler Stammtisch – June',
-      featured: true
+      start: new Date('2024-06-13T17:00'),
+      end: new Date('2024-06-13T22:00'),
+      title: 'Basler Stammtisch – June',
     },
     {
-      dateFrom: new Date('2024-04-13T17:00'),
-      dateTo: new Date('2024-04-13T22:00'),
-      name: 'Basler Stammtisch – April',
-      featured: true
+      start: new Date('2024-04-13T17:00'),
+      end: new Date('2024-04-13T22:00'),
+      title: 'Basler Stammtisch – April',
     },
     {
-      dateFrom: new Date('2024-04-13T17:00'),
-      dateTo: new Date('2024-04-13T22:00'),
-      name: 'Basler Stammtisch – April',
-      featured: true
+      start: new Date('2024-04-13T17:00'),
+      end: new Date('2024-04-13T22:00'),
+      title: 'Basler Stammtisch – April',
     }
   ].slice(0, defMax)
 }
 
-export const fetchOn = (d: Date): Event[] => {
-  const yesterday = new Date(d);
-  yesterday.setDate(yesterday.getDate() - 1)
+export const fetchRange = async (period: { start: Date, end: Date }): Promise<Event[]> => {
+  const ptr = new Date(period.start);
+  ptr.setDate(period.start.getDate() + 3);
+  const d3 = new Date(ptr);
 
-
-  const tomorrow = new Date(d);
-  tomorrow.setDate(tomorrow.getDate() + 1)
-
-  const day = new Date(d);
 
   return [
     {
-      dateFrom: day,
-      dateTo: day,
-      name: 'Basler Stammtisch – April',
-      featured: true
+      start: period.start,
+      end: period.start,
+      title: 'Basler Stammtisch – April',
     },
     {
-      dateFrom: day,
-      dateTo: day,
-      name: 'Basler Stammtisch – Mai'
+      start: period.start,
+      end: d3,
+      title: 'Basler Stammtisch – Mai',
     },
 
     {
-      dateFrom: yesterday,
-      dateTo: day,
-      name: 'Basler Stammtisch',
-      featured: true
+      start: period.start,
+      end: period.end,
+      title: 'Basler Stammtisch',
     },
-    {
-      dateFrom: yesterday,
-      dateTo: tomorrow,
-      name: 'Basler Stammtisch',
-      featured: true
-    },
-    {
-      dateFrom: day,
-      dateTo: tomorrow,
-      name: 'Basler Stammtisch',
-      featured: true
-    }
   ]
 }
