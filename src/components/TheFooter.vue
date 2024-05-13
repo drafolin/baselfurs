@@ -21,7 +21,7 @@ const year = new Date().getFullYear()
             </li>
             <li>
               <!-- TODO: ROUTER-LINK-->
-              <a href="/">Calendar</a>
+              <RouterLink to="/calendar">Calendar</RouterLink>
             </li>
           </ul>
         </div>
@@ -123,7 +123,7 @@ footer {
         flex-direction: column;
       }
 
-      > div {
+      >div {
         padding: 0 0.5em;
 
         h2 {
