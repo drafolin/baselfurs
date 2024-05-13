@@ -9,16 +9,16 @@ const props = defineProps<{
 
 <template>
   <ul>
-    <template v-for="(event, index) in props.events" :key="event.dateFrom.valueOf() + event.name">
+    <template v-for="(event, index) in props.events" :key="event.time.start.valueOf() + event.name">
       <hr v-if="index !== 0" />
       <li>
         <div :class="event.featured ? 'featured' : ''">
           <div class="date">
             <span class="month">
-              {{ event.dateFrom.toLocaleString('default', { month: 'short' }) }}
+              {{ event.time.start.toLocaleString('default', { month: 'short' }) }}
             </span>
             <span class="date">
-              {{ event.dateFrom.getDate() }}
+              {{ event.time.start.getDate() }}
             </span>
           </div>
           <div class="details">
@@ -26,22 +26,22 @@ const props = defineProps<{
               <img v-if="event.featured" :src="Star" alt="Featured" aria-label="Featured" />
               <span>
                 {{
-                  event.dateFrom.getHours().toString().padStart(2, '0') +
+                  event.time.start.getHours().toString().padStart(2, '0') +
                   ':' +
-                  event.dateFrom.getMinutes().toString().padStart(2, '0')
+                  event.time.start.getMinutes().toString().padStart(2, '0')
                 }}
               </span>
-              <span v-if="event.dateTo">
+              <span v-if="event.time.end">
                 {{
                   '&nbsp;- ' +
-                  event.dateTo.getHours().toString().padStart(2, '0') +
+                  event.time.end.getHours().toString().padStart(2, '0') +
                   ':' +
-                  event.dateTo.getHours().toString().padStart(2, '0')
+                  event.time.end.getHours().toString().padStart(2, '0')
                 }}
               </span>
             </div>
             <div>
-              {{ event.name }}
+              {{ event.title }}
             </div>
           </div>
         </div>
@@ -78,7 +78,7 @@ ul {
     margin: 0.5em 0;
     padding: 0;
 
-    > div {
+    >div {
       display: flex;
       flex-direction: row;
       align-items: stretch;
@@ -88,13 +88,13 @@ ul {
         border-left: 2px solid var(--accent);
       }
 
-      > .date {
+      >.date {
         display: flex;
         flex-direction: column;
         margin-right: 1.25em;
         justify-content: space-evenly;
 
-        > .date {
+        >.date {
           font-size: 2rem;
           font-weight: normal;
         }
@@ -106,7 +106,7 @@ ul {
         align-items: start;
         justify-content: space-evenly;
 
-        > div:first-child {
+        >div:first-child {
           display: flex;
           flex-direction: row;
           align-items: center;
