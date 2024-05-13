@@ -2,11 +2,14 @@
 import MeetPic from '@/assets/meetpic.jpg'
 import EventList from '@/components/EventList.vue'
 import { fetchNext } from '@/models/events'
+import type { Event } from '@/models/events'
 import Rolino from '@/assets/organizers/rolino.jpeg'
 import Misaki from '@/assets/organizers/misaki.jpg'
 import Joyce from '@/assets/organizers/joyce.jpg'
+import { ref } from 'vue'
 
-const events = fetchNext(3)
+const events = ref<Event[]>([])
+fetchNext(3).then(v => events.value = v)
 </script>
 
 <template>
@@ -27,11 +30,8 @@ const events = fetchNext(3)
       </div>
 
       <div class="pic">
-        <img
-          :src="MeetPic"
-          alt="A picture of the furmeet, with two fursuited furs in the foreground"
-          class="meet-pic"
-        />
+        <img :src="MeetPic" alt="A picture of the furmeet, with two fursuited furs in the foreground"
+          class="meet-pic" />
       </div>
     </section>
 
@@ -85,7 +85,7 @@ const events = fetchNext(3)
 
 <style lang="scss" scoped>
 main {
-  > section {
+  >section {
     display: flex;
     flex-direction: row;
     min-height: calc(100vh - 7rem);
@@ -108,7 +108,7 @@ main {
       padding: 1em;
     }
 
-    > div.sub {
+    >div.sub {
       padding: 1em min(6.5rem, 8vw);
 
       @media screen and (max-width: 660px) {
@@ -138,7 +138,7 @@ main {
     &.learn-more {
       align-items: center;
 
-      > div {
+      >div {
         background-color: rgba(var(--accent-rgb), 0.1);
         width: 100%;
         height: fit-content;
@@ -174,7 +174,7 @@ main {
         font-size: 3rem;
       }
 
-      > ul {
+      >ul {
         list-style: none;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -188,7 +188,7 @@ main {
           width: min(80vw, 20rem);
         }
 
-        > li {
+        >li {
           display: flex;
           flex-direction: column;
           align-items: center;

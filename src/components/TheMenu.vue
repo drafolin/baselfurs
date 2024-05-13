@@ -19,6 +19,10 @@ const links: Link[] = [
   {
     name: 'Links',
     url: '/links'
+  },
+  {
+    name: 'Events',
+    url: '/calendar'
   }
 ]
 </script>
@@ -33,35 +37,10 @@ const links: Link[] = [
   </nav>
 
   <template v-else>
-    <svg
-      viewBox="0 0 30 40"
-      xmlns="http://www.w3.org/2000/svg"
-      @click.capture="deployed = !deployed"
-    >
-      <line
-        :class="deployed ? 'animation-to' : ''"
-        :stroke="textColor"
-        x1="0"
-        x2="30"
-        y1="20"
-        y2="20"
-      />
-      <line
-        :class="deployed ? 'animation-to' : ''"
-        :stroke="textColor"
-        x1="0"
-        x2="30"
-        y1="20"
-        y2="20"
-      />
-      <line
-        :class="deployed ? 'animation-to' : ''"
-        :stroke="textColor"
-        x1="0"
-        x2="30"
-        y1="20"
-        y2="20"
-      />
+    <svg viewBox="0 0 30 40" xmlns="http://www.w3.org/2000/svg" @click.capture="deployed = !deployed">
+      <line :class="deployed ? 'animation-to' : ''" :stroke="textColor" x1="0" x2="30" y1="20" y2="20" />
+      <line :class="deployed ? 'animation-to' : ''" :stroke="textColor" x1="0" x2="30" y1="20" y2="20" />
+      <line :class="deployed ? 'animation-to' : ''" :stroke="textColor" x1="0" x2="30" y1="20" y2="20" />
     </svg>
 
     <Teleport to="body">
@@ -115,9 +94,11 @@ nav.desktop {
   from {
     transform: rotate(0) translateY(-10px);
   }
+
   50% {
     transform: rotate(0) translateY(0);
   }
+
   to {
     transform: rotate(45deg) translateY(0);
   }
@@ -127,9 +108,11 @@ nav.desktop {
   from {
     transform: rotate(45deg) translateY(0);
   }
+
   50% {
     transform: rotate(0) translateY(0);
   }
+
   to {
     transform: rotate(0) translateY(-10px);
   }
@@ -139,9 +122,11 @@ nav.desktop {
   from {
     opacity: 1;
   }
+
   50% {
     opacity: 0;
   }
+
   to {
     opacity: 0;
   }
@@ -151,9 +136,11 @@ nav.desktop {
   from {
     opacity: 0;
   }
+
   50% {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -163,9 +150,11 @@ nav.desktop {
   from {
     transform: rotate(0deg) translateY(10px);
   }
+
   50% {
     transform: rotate(0deg) translateY(0);
   }
+
   to {
     transform: rotate(-45deg) translateY(0);
   }
@@ -175,9 +164,11 @@ nav.desktop {
   from {
     transform: rotate(-45deg) translateY(0);
   }
+
   50% {
     transform: rotate(0) translateY(0);
   }
+
   to {
     transform: rotate(0) translateY(10px);
   }
@@ -246,7 +237,7 @@ svg {
     }
   }
 
-  > a {
+  >a {
     text-align: center;
   }
 }
