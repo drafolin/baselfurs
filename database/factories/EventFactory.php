@@ -24,12 +24,13 @@ class EventFactory extends Factory
      */
     public function definition(): array
     {
-        $end_date = fake()->dateTimeThisMonth();
+        $end_date = fake()->dateTimeThisMonth(date('Y-m-t'));
         return [
             'name' => fake()->words(3, true),
             'identifier' => fake()->unique()->uuid(),
-            'start_str' => fake()->dateTimeThisMonth($end_date),
-            'end_str' => $end_date,
+            'start_date' => fake()->dateTimeThisMonth($end_date),
+            'end_date' => $end_date,
+            'featured' => fake()->boolean()
         ];
     }
 }

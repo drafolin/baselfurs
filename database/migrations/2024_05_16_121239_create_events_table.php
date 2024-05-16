@@ -14,8 +14,9 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('identifier');
-            $table->string('start_str');
-            $table->string('end_str');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
+            $table->boolean('featured');
             $table->timestamps();
         });
     }
