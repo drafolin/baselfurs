@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Event;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -17,11 +18,22 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/calendar', function () {
-    $first_day_this_month = date('Y-m-01');  // hard-coded '01' for first day
-    $last_day_this_month = date('Y-m-t');
-    $events = Event::where('start_date', '<', $last_day_this_month)
-        ->orWhere('end_date', '>', $first_day_this_month)
+Route::get('/calendar', function (Request $request) {
+    $start = $request->input('start', date('Y-m-01'));
+    $end = $request->input('end', date('Y-m-t', strtotime($start)));
+
+    $events = Event::where([
+        ['start_date', '>', $start],
+        ['start_date', '<', $end]
+    ])
+        ->orWhere([
+            ['end_date', '>', $start],
+            ['end_date', '<', $end]
+        ])
+        ->orWhere([
+            ['start_date', '<', $start],
+            ['end_date', '>', $end]
+        ])
         ->get();
 
     $parsed_events = $events->map(function ($a) {
@@ -30,7 +42,9 @@ Route::get('/calendar', function () {
     });
 
     return Inertia::render('Calendar', [
-        'events' => $parsed_events
+        'events' => $parsed_events,
+        'start' => $start,
+        'end' => $end
     ]);
 });
 
