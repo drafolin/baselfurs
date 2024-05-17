@@ -58,14 +58,25 @@ const locale = window.navigator.language;
 
 <style lang="scss">
 .calendar-month__event-icon {
-    height: 1em;
-    width: 1em;
+    height: 8px;
+    width: 8px;
+    margin-right: 2px;
     border-radius: 0;
 
-    .calendar-month & {
-        height: 8px;
-        width: 8px;
-        margin-right: 2px;
+    .event-flyout & {
+        height: 1em;
+        width: 1em;
     }
+
+    .qalendar-is-small & {
+        height: 6px;
+        width: 6px;
+        margin: 0 1px;
+    }
+}
+
+.qalendar-is-small .calendar-month__event {
+    height: 6px !important;
+    width: 6px !important;
 }
 </style>
