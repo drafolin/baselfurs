@@ -18,6 +18,8 @@ return new class extends Migration {
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->boolean('featured');
+            $table->text('description');
+            $table->text('short_description');
             $table->timestamps();
         });
     }

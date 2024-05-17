@@ -12,13 +12,6 @@ const props = defineProps<{ events: Event[], start: string, end: string }>();
 type Period = { start: Date, end: Date, selectedDate: Date }
 const colors = ["blue", "yellow", "green", "red", "pink", "purple", "turquoise", "brown"] as const
 
-const ptr = new Date();
-ptr.setDate(1);
-const start = new Date(ptr.valueOf());
-ptr.setMonth(ptr.getMonth() + 1);
-ptr.setDate(0);
-const end = new Date(ptr.valueOf());
-
 const events = computed(() =>
     props.events.map((v, i) => {
         return {
@@ -30,6 +23,7 @@ const events = computed(() =>
             },
             color: colors[i % colors.length],
             title: v.name,
+            description: v.short_description
         }
     })
 );
@@ -42,7 +36,6 @@ const refreshEvents = (start: Date, end: Date) => {
         replace: true,
         preserveState: true,
         preserveScroll: true,
-
     })
 }
 

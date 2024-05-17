@@ -30,7 +30,9 @@ class EventFactory extends Factory
             'identifier' => fake()->unique()->uuid(),
             'start_date' => fake()->dateTimeThisMonth($end_date),
             'end_date' => $end_date,
-            'featured' => fake()->boolean()
+            'featured' => fake()->boolean(),
+            'description' => fake()->paragraphs(3, true),
+            'short_description' => fake()->text(300)
         ];
     }
 }

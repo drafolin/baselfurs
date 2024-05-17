@@ -14,6 +14,8 @@ class Event extends Model
         'identifier',
         'featured',
         'start_date',
-        'end_date'
+        'end_date',
+        'description',
+        'short_description'
     ];
 }

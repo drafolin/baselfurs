@@ -4,6 +4,8 @@ export type JsonEvent = {
     identifier: string
     name: string
     featured?: boolean
+    description: string
+    short_description: string
 }
 
 
@@ -13,4 +15,6 @@ export type Event = {
     identifier: string
     name: string
     featured?: boolean
+    description: string
+    short_description: string
 }

@@ -34,6 +34,13 @@ class EventResource extends Resource
                 Forms\Components\DateTimePicker::make('end_date')
                     ->seconds(false)
                     ->columnStart(2),
+                Forms\Components\RichEditor::make('short_description')
+                    ->maxLength(300)
+                    ->helperText('Will be displayed in the event popout.')
+                    ->columnSpan(2),
+                Forms\Components\RichEditor::make('description')
+                    ->helperText('Will be displayed in the event details page.')
+                    ->columnSpan(2)
             ]);
     }
 
