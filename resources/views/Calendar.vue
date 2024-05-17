@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 import { Qalendar } from "@drafolin/qalendar";
 import "@drafolin/qalendar/dist/style.css";
 import { format } from "date-fns";
-import type { Event } from "@/models/events.ts";
+import type { Event } from "@/models/events";
 import Star from "@/assets/icons/star.png";
+import { router } from '@inertiajs/vue3'
 
-const { events: propEvents } = defineProps<{ events: Event[] }>();
+const props = defineProps<{ events: Event[], start: string, end: string }>();
 
 type Period = { start: Date, end: Date, selectedDate: Date }
 const colors = ["blue", "yellow", "green", "red", "pink", "purple", "turquoise", "brown"] as const
@@ -32,8 +33,8 @@ const end = new Date(ptr.valueOf());
 
 
 const range = ref<Period>({ start, end, selectedDate: new Date() });
-const events = ref<CalendarEvent[]>(
-    propEvents.map((v, i) => {
+const events = computed(() =>
+    props.events.map((v, i) => {
         return {
             ...v,
             id: v.identifier,
@@ -46,29 +47,24 @@ const events = ref<CalendarEvent[]>(
         }
     })
 );
-
-
-// watch(range,
-//   async () => {
-//     events.value = await fetchRange(range.value).then(v => v.map((ev, i) => ({
-//       ...ev,
-//       time: {
-//         start: format(ev.time.start, 'yyyy-MM-dd HH:mm'),
-//         end: format(ev.time.end, 'yyyy-MM-dd HH:mm')
-//       },
-//       color: colors[i % colors.length]
-//     })))
-//   }, { immediate: true })
-
-
 const HandleUpdatedMode = (v: { period: Period }) => { range.value = v.period }
 </script>
 
 <template>
     <main>
         <h1>Calendar</h1>
-        <Qalendar :events="events" :config="{ defaultMode: 'month', locale: 'normal' }"
-            @updated-period="(v: Period) => { range = v }" @updated-mode="HandleUpdatedMode">
+        <Qalendar :events="events" :config="{ defaultMode: 'month', locale: 'normal' }" @updated-period="(v: Period) => {
+            router.get('/calendar', {
+                start: format(v.start, 'yyyy-MM-dd HH:mm'),
+                end: format(v.end, 'yyyy-MM-dd HH:mm')
+            }, {
+                replace: true,
+                preserveState: true,
+                preserveScroll: true,
+
+            })
+        }" @updated-mode="HandleUpdatedMode"
+            :selectedDate="new Date((new Date(props.start).valueOf() + new Date(props.end).valueOf()) / 2)">
             <template #eventIcon="props">
                 <img :src="Star" alt="Featured" v-if="props.eventData.featured" class="calendar-month__event-icon" />
             </template>
