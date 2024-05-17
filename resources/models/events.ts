@@ -6,6 +6,9 @@ export type JsonEvent = {
     featured?: boolean
     description: string
     short_description: string
+    address: string
+    lat: number
+    lng: number
 }
 
 
@@ -17,4 +20,7 @@ export type Event = {
     featured?: boolean
     description: string
     short_description: string
+    address: string
+    lat: number
+    lng: number
 }

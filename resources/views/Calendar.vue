@@ -5,7 +5,7 @@ import "@drafolin/qalendar/dist/style.css";
 import { format } from "date-fns";
 import type { Event } from "@/models/events";
 import Star from "@/assets/icons/star.png";
-import { router } from '@inertiajs/vue3'
+import { router, Link } from '@inertiajs/vue3';
 
 const props = defineProps<{ events: Event[], start: string, end: string }>();
 
@@ -23,7 +23,9 @@ const events = computed(() =>
             },
             color: colors[i % colors.length],
             title: v.name,
-            description: v.short_description
+            url: `/events/${v.identifier}`,
+            description: v.short_description,
+            location: v.address
         }
     })
 );
@@ -51,6 +53,12 @@ const locale = window.navigator.language;
             :selectedDate="new Date((new Date(props.start).valueOf() + new Date(props.end).valueOf()) / 2)">
             <template #eventIcon="props">
                 <img :src="Star" alt="Featured" v-if="props.eventData.featured" class="calendar-month__event-icon" />
+            </template>
+
+            <template #link="p">
+                <Link :href="p.href">
+                {{ p.text }}
+                </Link>
             </template>
         </Qalendar>
     </main>

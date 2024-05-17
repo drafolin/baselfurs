@@ -32,7 +32,10 @@ class EventFactory extends Factory
             'end_date' => $end_date,
             'featured' => fake()->boolean(),
             'description' => fake()->paragraphs(3, true),
-            'short_description' => fake()->text(300)
+            'short_description' => fake()->text(300),
+            'address' => fake('de_CH')->address(),
+            'lat' => fake('de_CH')->latitude(),
+            'lng' => fake('de_CH')->longitude()
         ];
     }
 }
