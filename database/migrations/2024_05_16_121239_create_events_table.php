@@ -14,10 +14,15 @@ return new class extends Migration {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->uuid('identifier')->default(Str::uuid());
+            $table->uuid('identifier')->default(Str::uuid())->unique();
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->boolean('featured');
+            $table->text('description');
+            $table->text('short_description');
+            $table->string('address');
+            $table->float('lat');
+            $table->float('lng');
             $table->timestamps();
         });
     }

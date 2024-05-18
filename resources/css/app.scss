@@ -34,7 +34,11 @@ a:not(.button) {
 
     &:hover {
         color: color-mix(in srgb, var(--accent) 50%, var(--foreground) 50%);
-        text-decoration: underline;
+        text-decoration: solid underline;
+    }
+
+    :not(li)>& {
+        text-decoration: dashed underline;
     }
 }
 

@@ -24,4 +24,6 @@ services:
     working_dir: /home/node/app
     user: "node"
     command: npm run dev -- --host
+    stdin_open: true
+    tty: true
 

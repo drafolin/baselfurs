@@ -51,3 +51,10 @@ Route::get('/calendar', function (Request $request) {
 Route::get('/links', function () {
     return Inertia::render('Links');
 });
+
+Route::get('/events/{id}', function (string $id, Request $request) {
+    $event = Event::where('identifier', $id)
+        ->first();
+    $event['featured'] = $event['featured'] == 1;
+    return Inertia::render('Event', $event);
+});

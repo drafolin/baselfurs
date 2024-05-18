@@ -5,19 +5,12 @@ import "@drafolin/qalendar/dist/style.css";
 import { format } from "date-fns";
 import type { Event } from "@/models/events";
 import Star from "@/assets/icons/star.png";
-import { router } from '@inertiajs/vue3'
+import { router, Link } from '@inertiajs/vue3';
 
 const props = defineProps<{ events: Event[], start: string, end: string }>();
 
 type Period = { start: Date, end: Date, selectedDate: Date }
 const colors = ["blue", "yellow", "green", "red", "pink", "purple", "turquoise", "brown"] as const
-
-const ptr = new Date();
-ptr.setDate(1);
-const start = new Date(ptr.valueOf());
-ptr.setMonth(ptr.getMonth() + 1);
-ptr.setDate(0);
-const end = new Date(ptr.valueOf());
 
 const events = computed(() =>
     props.events.map((v, i) => {
@@ -30,6 +23,9 @@ const events = computed(() =>
             },
             color: colors[i % colors.length],
             title: v.name,
+            url: `/events/${v.identifier}`,
+            description: v.short_description,
+            location: v.address
         }
     })
 );
@@ -42,7 +38,6 @@ const refreshEvents = (start: Date, end: Date) => {
         replace: true,
         preserveState: true,
         preserveScroll: true,
-
     })
 }
 
@@ -59,20 +54,37 @@ const locale = window.navigator.language;
             <template #eventIcon="props">
                 <img :src="Star" alt="Featured" v-if="props.eventData.featured" class="calendar-month__event-icon" />
             </template>
+
+            <template #link="p">
+                <Link :href="p.href">
+                {{ p.text }}
+                </Link>
+            </template>
         </Qalendar>
     </main>
 </template>
 
 <style lang="scss">
 .calendar-month__event-icon {
-    height: 1em;
-    width: 1em;
+    height: 8px;
+    width: 8px;
+    margin-right: 2px;
     border-radius: 0;
 
-    .calendar-month & {
-        height: 8px;
-        width: 8px;
-        margin-right: 2px;
+    .event-flyout & {
+        height: 1em;
+        width: 1em;
     }
+
+    .qalendar-is-small & {
+        height: 6px;
+        width: 6px;
+        margin: 0 1px;
+    }
+}
+
+.qalendar-is-small .calendar-month__event {
+    height: 6px !important;
+    width: 6px !important;
 }
 </style>

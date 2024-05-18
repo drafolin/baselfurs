@@ -3,8 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\EventResource\Pages;
-use App\Filament\Resources\EventResource\RelationManagers;
 use App\Models\Event;
+use Cheesegrits\FilamentGoogleMaps\Fields\Map;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Filters\Filter;
@@ -12,7 +12,6 @@ use Filament\Tables\Table;
 use Filament\Forms;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class EventResource extends Resource
 {
@@ -34,6 +33,27 @@ class EventResource extends Resource
                 Forms\Components\DateTimePicker::make('end_date')
                     ->seconds(false)
                     ->columnStart(2),
+                Forms\Components\RichEditor::make('short_description')
+                    ->maxLength(300)
+                    ->helperText('Will be displayed in the event popout.')
+                    ->columnSpan(2),
+                Forms\Components\RichEditor::make('description')
+                    ->helperText('Will be displayed in the event details page.')
+                    ->columnSpan(2),
+                Forms\Components\TextInput::make('address'),
+                Map::make('location')
+                    ->columnSpanFull()
+                    ->autocomplete(
+                        fieldName: 'address',
+                        countries: ['CH', 'FR', 'DE']
+                    )
+                    ->reverseGeocode([
+                        'street' => '%n %S',
+                        'city' => '%L',
+                        'state' => '%A1',
+                        'zip' => '%z',
+                    ])
+                    ->autocompleteReverse(true)
             ]);
     }
 
