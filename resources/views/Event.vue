@@ -44,6 +44,10 @@ const map = ref<typeof LMap>(null)
                 </a>
             </div>
         </div>
+        <div>
+            <h2>Interested ?</h2>
+            <button>Attend</button>
+        </div>
     </main>
 </template>
 
