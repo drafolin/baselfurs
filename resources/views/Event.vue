@@ -28,19 +28,20 @@ const map = ref<typeof LMap>(null)
         <div v-html="props.description" />
         <h2>Location</h2>
         <div class="address">
+            <div class="map">
+                <l-map :use-global-leaflet="false" style="z-index: 0;" ref="map" v-model:zoom="zoom"
+                    :center="[props.lat, props.lng]">
+                    <l-tile-layer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" layer-type="base"
+                        name="OpenStreetMap"></l-tile-layer>
+                    <l-marker :lat-lng="[props.lat, props.lng]" />
+                </l-map>
+            </div>
             <div class="text">
                 <h3>Address</h3>
                 <a target="_blank"
                     :href="`https://www.google.com/maps/place/${props.lat},${props.lng}/@${props.lat},${props.lng},15z`">
                     <div v-for="addressLine in props.address.split(',')">{{ addressLine }}</div>
                 </a>
-            </div>
-            <div class="map">
-                <l-map :use-global-leaflet="false" ref="map" v-model:zoom="zoom" :center="[props.lat, props.lng]">
-                    <l-tile-layer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" layer-type="base"
-                        name="OpenStreetMap"></l-tile-layer>
-                    <l-marker :lat-lng="[props.lat, props.lng]" />
-                </l-map>
             </div>
         </div>
     </main>
@@ -53,30 +54,23 @@ main>div {
     &.address {
         display: flex;
         flex-direction: row;
-        justify-content: space-evenly;
-        width: 70%;
-
-        @media screen and (max-width: 600px) {
-            width: 100%;
-            justify-content: space-between;
-
-            .text {
-                margin-right: 0;
-            }
-        }
+        justify-content: start;
+        width: 100%;
 
         h3 {
             margin-top: 0;
         }
 
-        .text {
-            margin-right: 3.5em;
-        }
-
         .map {
+            flex-grow: 1;
             height: 300px;
             max-height: 30vw;
             width: 30vw;
+            padding-right: 5vw;
+
+            @media screen and (min-width: 660px) {
+                max-width: 40vw;
+            }
         }
     }
 }
