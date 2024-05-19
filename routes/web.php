@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Attendance;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -57,4 +58,15 @@ Route::get('/events/{id}', function (string $id, Request $request) {
         ->first();
     $event['featured'] = $event['featured'] == 1;
     return Inertia::render('Event', $event);
+});
+
+Route::post('/events/{id}/attend', function (string $id, Request $request) {
+    $attendance = new Attendance;
+    $event = Event::where('identifier', $id)
+        ->first();
+    $attendance->event_id = $event->id;
+    $attendance->email = $request->input('email');
+    $attendance->name = $request->input('name');
+    $attendance->contact = $request->input('contact');
+    $attendance->save();
 });

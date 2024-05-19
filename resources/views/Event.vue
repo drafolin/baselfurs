@@ -2,6 +2,7 @@
 import { JsonEvent } from '@/models/events';
 import { ref } from 'vue';
 import "leaflet/dist/leaflet.css";
+import { useForm } from '@inertiajs/vue3'
 import { LMap, LTileLayer, LMarker } from "@vue-leaflet/vue-leaflet";
 
 const props = defineProps<JsonEvent>()
@@ -13,6 +14,14 @@ const zoom = ref(15);
 
 
 const map = ref<typeof LMap>(null)
+
+const attendance = useForm({
+    email: "",
+    name: "",
+    contact: ""
+})
+
+const attendanceSuccess = ref(false);
 </script>
 
 <template>
@@ -46,7 +55,44 @@ const map = ref<typeof LMap>(null)
         </div>
         <div>
             <h2>Interested ?</h2>
-            <button>Attend</button>
+            <div v-if="attendanceSuccess" class="attendance-success">
+                Your attendance has been registered successfully!
+            </div>
+            <form @submit.prevent="attendance.post(`/events/${props.identifier}/attend`, {
+                preserveScroll: true,
+                preserveState: true,
+                onSuccess: () => {
+                    attendanceSuccess = true
+                }
+            })">
+                <div class="data">
+                    <label class="required">
+                        <span class="label">Name</span>
+                        <input type="text" name="name" required v-model="attendance.name">
+                        <span class="hint">
+                            May be your fursona name or username.
+                        </span>
+                    </label>
+
+                    <label class="required">
+                        <span class="label">Contact</span>
+                        <input type="text" name="contact" required v-model="attendance.contact">
+                        <span class="hint">
+                            How we may contact you if anything happens.
+                        </span>
+                    </label>
+
+                    <label class="required">
+                        <span class="label">E-mail</span>
+                        <input type="email" name="email" required v-model="attendance.email">
+                        <span class="hint">
+                            Mainly used for identifying you and backup communication.
+                        </span>
+                    </label>
+                </div>
+
+                <button type="submit" :disabled="attendance.processing">Attend</button>
+            </form>
         </div>
     </main>
 </template>
@@ -75,6 +121,50 @@ main>div {
             @media screen and (min-width: 660px) {
                 max-width: 40vw;
             }
+        }
+    }
+}
+
+.attendance-success {
+    background-color: rgba(20, 200, 70, 0.25);
+    padding: 0.5em;
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(20, 200, 70, 0.75);
+    margin-bottom: 1em;
+}
+
+form {
+    .data {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 2rem;
+        margin-bottom: 2rem;
+
+        @media screen and (min-width: 660px) {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    label {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+
+        &.required span.label::after {
+            content: '*';
+            color: red;
+        }
+
+        input {
+            width: 100%;
+            padding: .5em;
+            border: 1px solid color-mix(in oklab, var(--foreground), var(--background) 85%);
+            border-radius: var(--border-radius);
+        }
+
+        .hint {
+            font-size: .7em;
+            opacity: 0.6;
         }
     }
 }
