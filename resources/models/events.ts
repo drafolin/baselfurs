@@ -9,6 +9,9 @@ export type JsonEvent = {
     address: string
     lat: number
     lng: number
+    registration_location: 'Local' | 'Both' | 'Remote'
+    origin_url: string
+    registration_required: boolean
 }
 
 
@@ -23,4 +26,7 @@ export type Event = {
     address: string
     lat: number
     lng: number
+    registration_location: 'Local' | 'Both' | 'Remote'
+    origin_url: string
+    registration_required: boolean
 }

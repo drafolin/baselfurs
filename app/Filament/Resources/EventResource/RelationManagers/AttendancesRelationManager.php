@@ -2,14 +2,15 @@
 
 namespace App\Filament\Resources\EventResource\RelationManagers;
 
+use App\Enums\RegistrationLocation;
 use App\Models\Attendance;
+use App\Models\Event;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Table;
 use Filament\Forms;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Database\Eloquent\Model;
 
 class AttendancesRelationManager extends RelationManager
 {
@@ -18,6 +19,14 @@ class AttendancesRelationManager extends RelationManager
     public function isReadOnly(): bool
     {
         return false;
+    }
+
+    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    {
+        if ($ownerRecord instanceof Event)
+            return $ownerRecord->registration_location != RegistrationLocation::Remote;
+
+        return true;
     }
 
     public function form(Form $form): Form

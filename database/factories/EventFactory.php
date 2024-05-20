@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\RegistrationLocation;
 use App\Models\Event;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -35,7 +36,9 @@ class EventFactory extends Factory
             'short_description' => fake()->text(300),
             'address' => fake('de_CH')->address(),
             'lat' => fake('de_CH')->latitude(),
-            'lng' => fake('de_CH')->longitude()
+            'lng' => fake('de_CH')->longitude(),
+            'registration_location' => fake()->randomElement(RegistrationLocation::class),
+            'registration_required' => fake()->boolean(),
         ];
     }
 }

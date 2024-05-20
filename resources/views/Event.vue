@@ -27,12 +27,22 @@ const attendanceSuccess = ref(false);
 <template>
     <main>
         <h1>{{ props.name }}</h1>
+        <div v-if="props.registration_required" class="warning">
+            This event requires a registration.
+        </div>
         <div class="time">
             {{ startDate.toLocaleDateString("normal", { month: 'long', day: 'numeric' }) }}
             {{ startDate.toLocaleTimeString("normal", { hour: '2-digit', minute: '2-digit' }) }}
             -
             {{ endDate.toLocaleDateString("normal", { month: 'long', day: 'numeric' }) }}
             {{ endDate.toLocaleTimeString("normal", { hour: '2-digit', minute: '2-digit' }) }}
+        </div>
+        <div class="keyval">
+            <ul>
+                <li>
+                    Origin website: <a :href="props.origin_url">{{ props.origin_url }}</a>
+                </li>
+            </ul>
         </div>
         <div v-html="props.description" />
         <h2>Location</h2>
@@ -53,7 +63,7 @@ const attendanceSuccess = ref(false);
                 </a>
             </div>
         </div>
-        <div>
+        <div v-if="props.registration_location !== 'Remote'">
             <h2>Interested ?</h2>
             <div v-if="attendanceSuccess" class="attendance-success">
                 Your attendance has been registered successfully!
@@ -91,6 +101,16 @@ const attendanceSuccess = ref(false);
                     </label>
                 </div>
 
+                <template v-if="props.registration_location !== 'Local'">
+                    <p class="warning" v-if="props.registration_required">
+                        This registration form is solely used for organization. Please
+                        check the <a :href="props.origin_url">origin website</a> for the actual registration.
+                    </p>
+                    <p class="warning" v-else>
+                        This form is used by us for organization. The official form is
+                        over on the <a :href="props.origin_url">origin website</a>.
+                    </p>
+                </template>
                 <button type="submit" :disabled="attendance.processing">Attend</button>
             </form>
         </div>
@@ -126,11 +146,19 @@ main>div {
 }
 
 .attendance-success {
-    background-color: rgba(20, 200, 70, 0.25);
+    background-color: rgba(20, 200, 70, 0.05);
     padding: 0.5em;
     border-radius: var(--border-radius);
     border: 1px solid rgba(20, 200, 70, 0.75);
     margin-bottom: 1em;
+}
+
+.warning {
+    background-color: rgba(255, 150, 0, .05);
+    color: rgb(255, 150, 0);
+    border: 1px solid rgba(255, 150, 0, .75);
+    border-radius: var(--border-radius);
+    padding: .5em;
 }
 
 form {

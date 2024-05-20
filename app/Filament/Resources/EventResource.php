@@ -33,6 +33,24 @@ class EventResource extends Resource
                 Forms\Components\DateTimePicker::make('end_date')
                     ->seconds(false)
                     ->columnStart(2),
+                Forms\Components\TextInput::make('origin_url')
+                    ->url()
+                    ->columnStart(1)
+                    ->requiredUnless('registration_location', 'Local'),
+                Forms\Components\Split::make([
+                    Forms\Components\ToggleButtons::make('registration_location')
+                        ->options([
+                            'Local' => 'Local',
+                            'Both' => 'Both',
+                            'Remote' => 'Remote'
+                        ])
+                        ->grouped()
+                        ->grow(false),
+                    Forms\Components\ToggleButtons::make('registration_required')
+                        ->boolean()
+                        ->grouped()
+                        ->helperText('Whether the event requires a registration, either here or on the origin website.'),
+                ]),
                 Forms\Components\RichEditor::make('short_description')
                     ->maxLength(300)
                     ->helperText('Will be displayed in the event popout.')
