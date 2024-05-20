@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\RegistrationLocation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
@@ -19,11 +21,25 @@ class Event extends Model
         'short_description',
         'address',
         'location',
+        'origin_url',
+        'registration_location',
+        'registration_required'
     ];
 
     protected $appends = [
         'location',
     ];
+
+    protected $casts = [
+        'featured' => 'boolean',
+        'registration_required' => 'boolean',
+        'registration_location' => RegistrationLocation::class
+    ];
+
+    public function attendances(): HasMany
+    {
+        return $this->hasMany(Attendance::class);
+    }
 
     /**
      * Returns the 'lat' and 'lng' attributes as the computed 'location' attribute,

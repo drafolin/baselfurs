@@ -33,6 +33,24 @@ class EventResource extends Resource
                 Forms\Components\DateTimePicker::make('end_date')
                     ->seconds(false)
                     ->columnStart(2),
+                Forms\Components\TextInput::make('origin_url')
+                    ->url()
+                    ->columnStart(1)
+                    ->requiredUnless('registration_location', 'Local'),
+                Forms\Components\Split::make([
+                    Forms\Components\ToggleButtons::make('registration_location')
+                        ->options([
+                            'Local' => 'Local',
+                            'Both' => 'Both',
+                            'Remote' => 'Remote'
+                        ])
+                        ->grouped()
+                        ->grow(false),
+                    Forms\Components\ToggleButtons::make('registration_required')
+                        ->boolean()
+                        ->grouped()
+                        ->helperText('Whether the event requires a registration, either here or on the origin website.'),
+                ]),
                 Forms\Components\RichEditor::make('short_description')
                     ->maxLength(300)
                     ->helperText('Will be displayed in the event popout.')
@@ -62,7 +80,8 @@ class EventResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\IconColumn::make('featured')
-                    ->boolean(),
+                    ->boolean()
+                    ->alignCenter(),
                 Tables\Columns\TextColumn::make('start_date')
                     ->date()
                     ->sortable(),
@@ -79,14 +98,14 @@ class EventResource extends Resource
                     ->default(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
             ]);
     }
 
     public static function getRelations(): array
     {
         return [
-            //
+            EventResource\RelationManagers\AttendancesRelationManager::class,
         ];
     }
 
@@ -96,6 +115,7 @@ class EventResource extends Resource
             'index' => Pages\ListEvents::route('/'),
             'create' => Pages\CreateEvent::route('/create'),
             'edit' => Pages\EditEvent::route('/{record}/edit'),
+            'view' => Pages\ViewEvent::route('/{record}')
         ];
     }
 }

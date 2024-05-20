@@ -23,6 +23,9 @@ return new class extends Migration {
             $table->string('address');
             $table->float('lat');
             $table->float('lng');
+            $table->string('origin_url')->nullable();
+            $table->enum('registration_location', ['Local', 'Both', 'Remote']);
+            $table->boolean('registration_required');
             $table->timestamps();
         });
     }
