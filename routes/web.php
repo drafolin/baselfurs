@@ -37,13 +37,8 @@ Route::get('/calendar', function (Request $request) {
         ])
         ->get();
 
-    $parsed_events = $events->map(function ($a) {
-        $a['featured'] = ($a['featured'] == 1);
-        return $a;
-    });
-
     return Inertia::render('Calendar', [
-        'events' => $parsed_events,
+        'events' => $events,
         'start' => $start,
         'end' => $end
     ]);

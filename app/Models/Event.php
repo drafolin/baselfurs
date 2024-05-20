@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
@@ -24,6 +25,15 @@ class Event extends Model
     protected $appends = [
         'location',
     ];
+
+    protected $casts = [
+        'featured' => 'boolean'
+    ];
+
+    public function attendances(): HasMany
+    {
+        return $this->hasMany(Attendance::class);
+    }
 
     /**
      * Returns the 'lat' and 'lng' attributes as the computed 'location' attribute,
