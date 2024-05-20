@@ -18,7 +18,9 @@ const map = ref<typeof LMap>(null)
 const attendance = useForm({
     email: "",
     name: "",
-    contact: ""
+    contact: "",
+    more_info: "",
+    amount_of_people: 1
 })
 
 const attendanceSuccess = ref(false);
@@ -37,9 +39,9 @@ const attendanceSuccess = ref(false);
             {{ endDate.toLocaleDateString("normal", { month: 'long', day: 'numeric' }) }}
             {{ endDate.toLocaleTimeString("normal", { hour: '2-digit', minute: '2-digit' }) }}
         </div>
-        <div class="keyval">
+        <div class="keyval" v-if="props.origin_url">
             <ul>
-                <li>
+                <li v-if="props.origin_url">
                     Origin website: <a :href="props.origin_url">{{ props.origin_url }}</a>
                 </li>
             </ul>
@@ -85,6 +87,14 @@ const attendanceSuccess = ref(false);
                     </label>
 
                     <label class="required">
+                        <span class="label">Amount of people</span>
+                        <input type="number" name="amount_of_people" required v-model="attendance.amount_of_people">
+                        <span class="hint">
+                            How many furs will be there with you, including you.
+                        </span>
+                    </label>
+
+                    <label class="required">
                         <span class="label">Contact</span>
                         <input type="text" name="contact" required v-model="attendance.contact">
                         <span class="hint">
@@ -97,6 +107,14 @@ const attendanceSuccess = ref(false);
                         <input type="email" name="email" required v-model="attendance.email">
                         <span class="hint">
                             Mainly used for identifying you and backup communication.
+                        </span>
+                    </label>
+
+                    <label style="grid-column-start:1; grid-column-end: 3">
+                        <span class="label">Additional information</span>
+                        <textarea name="more_info" v-model="attendance.more_info" />
+                        <span class="hint">
+                            Additional information we may need to know about.
                         </span>
                     </label>
                 </div>
@@ -165,7 +183,8 @@ form {
     .data {
         display: grid;
         grid-template-columns: 1fr;
-        grid-gap: 2rem;
+        grid-column-gap: 2rem;
+        grid-row-gap: 1rem;
         margin-bottom: 2rem;
 
         @media screen and (min-width: 660px) {
@@ -183,9 +202,10 @@ form {
             color: red;
         }
 
-        input {
+        input,
+        textarea {
             width: 100%;
-            padding: .5em;
+            padding: .75em;
             border: 1px solid color-mix(in oklab, var(--foreground), var(--background) 85%);
             border-radius: var(--border-radius);
         }
