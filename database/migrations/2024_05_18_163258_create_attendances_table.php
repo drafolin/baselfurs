@@ -15,6 +15,8 @@ return new class extends Migration {
             $table->string('email');
             $table->text('contact');
             $table->string('name');
+            $table->text('more_info')->nullable();
+            $table->integer('amount_of_people');
             $table->foreignId('event_id')->constrained();
             $table->timestamps();
         });

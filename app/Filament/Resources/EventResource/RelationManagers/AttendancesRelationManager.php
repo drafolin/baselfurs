@@ -36,12 +36,16 @@ class AttendancesRelationManager extends RelationManager
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('number_of_people')
+                    ->required()
+                    ->default(1)
+                    ->numeric(),
                 Forms\Components\TextInput::make('email')
                     ->required()
                     ->email(),
-                Forms\Components\Textarea::make('contact')
-                    ->required()
-                    ->columnSpan(2),
+                Forms\Components\TextInput::make('contact')
+                    ->required(),
+                Forms\Components\Textarea::make('more_info')
             ]);
     }
 
@@ -50,6 +54,7 @@ class AttendancesRelationManager extends RelationManager
         return $table
             ->recordTitle(fn(Attendance $record) => "$record->name's attendance")
             ->columns([
+                Tables\Columns\TextColumn::make('amount_of_people'),
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('email')
             ])
