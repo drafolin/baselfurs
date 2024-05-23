@@ -210,6 +210,10 @@ form {
             border-radius: var(--border-radius);
         }
 
+        textarea {
+            resize: vertical;
+        }
+
         .hint {
             font-size: .7em;
             opacity: 0.6;
