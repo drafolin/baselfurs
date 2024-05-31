@@ -13,7 +13,10 @@ class ViewEvent extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make()
+            Actions\EditAction::make(),
+            Actions\Action::make('view-page')
+                ->button()
+                ->url("/events/{$this->record->identifier}")
         ];
     }
 }

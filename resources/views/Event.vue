@@ -42,7 +42,7 @@ const attendanceSuccess = ref(false);
         <div class="keyval" v-if="props.origin_url">
             <ul>
                 <li v-if="props.origin_url">
-                    Origin website: <a :href="props.origin_url">{{ props.origin_url }}</a>
+                    Origin website: <a :href="props.origin_url" target="_blank">{{ props.origin_url }}</a>
                 </li>
             </ul>
         </div>
@@ -181,14 +181,16 @@ main>div {
 
 form {
     .data {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-column-gap: 2rem;
-        grid-row-gap: 1rem;
+        display: flex;
+        flex-direction: column;
         margin-bottom: 2rem;
 
         @media screen and (min-width: 660px) {
+            display: grid;
             grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
+            grid-column-gap: 2rem;
+            grid-row-gap: 1rem;
         }
     }
 

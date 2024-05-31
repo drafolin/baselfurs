@@ -21,8 +21,8 @@ return new class extends Migration {
             $table->text('description');
             $table->text('short_description');
             $table->string('address');
-            $table->float('lat');
-            $table->float('lng');
+            $table->float('lat')->nullable();
+            $table->float('lng')->nullable();
             $table->string('origin_url')->nullable();
             $table->enum('registration_location', ['Local', 'Both', 'Remote']);
             $table->boolean('registration_required');

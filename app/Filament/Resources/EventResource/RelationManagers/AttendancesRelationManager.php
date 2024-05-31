@@ -36,7 +36,7 @@ class AttendancesRelationManager extends RelationManager
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('number_of_people')
+                Forms\Components\TextInput::make('amount_of_people')
                     ->required()
                     ->default(1)
                     ->numeric(),

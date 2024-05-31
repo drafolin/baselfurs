@@ -57,7 +57,7 @@ const events = ref<Event[]>(propsEvent.map((v, i) => {
             <h2>Our Local Furries</h2>
             <ul>
                 <li>
-                    <a href="https://t.me/Rolino">
+                    <a href="https://t.me/Rolino" target="_blank">
                         <img :src="Rolino" alt="Rolino" />
                     </a>
                     <p class="name">Rolino</p>
@@ -67,7 +67,7 @@ const events = ref<Event[]>(propsEvent.map((v, i) => {
                     </ul>
                 </li>
                 <li>
-                    <a href="https://t.me/Misaki_theswisswolf">
+                    <a href="https://t.me/Misaki_theswisswolf" target="_blank">
                         <img :src="Misaki" alt="Misaki" />
                     </a>
                     <p class="name">Misaki</p>
@@ -77,7 +77,7 @@ const events = ref<Event[]>(propsEvent.map((v, i) => {
                     </ul>
                 </li>
                 <li>
-                    <a href="https://t.me/SnugglyJoyce">
+                    <a href="https://t.me/SnugglyJoyce" target="_blank">
                         <img :src="Joyce" alt="Joyce" />
                     </a>
                     <p class="name">Joyce</p>

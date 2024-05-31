@@ -23,42 +23,51 @@ class EventResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name'),
+                Forms\Components\TextInput::make('name')
+                    ->required(),
                 Forms\Components\ToggleButtons::make('featured')
                     ->boolean()
+                    ->required()
                     ->grouped(),
                 Forms\Components\DateTimePicker::make('start_date')
                     ->seconds(false)
-                    ->columnStart(1),
+                    ->required(),
                 Forms\Components\DateTimePicker::make('end_date')
                     ->seconds(false)
-                    ->columnStart(2),
-                Forms\Components\TextInput::make('origin_url')
-                    ->url()
-                    ->columnStart(1)
-                    ->requiredUnless('registration_location', 'Local'),
-                Forms\Components\Split::make([
-                    Forms\Components\ToggleButtons::make('registration_location')
-                        ->options([
-                            'Local' => 'Local',
-                            'Both' => 'Both',
-                            'Remote' => 'Remote'
-                        ])
-                        ->grouped()
-                        ->grow(false),
-                    Forms\Components\ToggleButtons::make('registration_required')
-                        ->boolean()
-                        ->grouped()
-                        ->helperText('Whether the event requires a registration, either here or on the origin website.'),
+                    ->required(),
+                Forms\Components\Section::make('Registration')->schema([
+                    Forms\Components\TextInput::make('origin_url')
+                        ->url()
+                        ->requiredUnless('registration_location', 'Local'),
+                    Forms\Components\Split::make([
+                        Forms\Components\ToggleButtons::make('registration_location')
+                            ->options([
+                                'Local' => 'Local',
+                                'Both' => 'Both',
+                                'Remote' => 'Remote'
+                            ])
+                            ->grouped()
+                            ->required()
+                            ->grow(false),
+                        Forms\Components\ToggleButtons::make('registration_required')
+                            ->boolean()
+                            ->grouped()
+                            ->required()
+                            ->helperText('Whether the event requires a registration, either here or on the origin website.'),
+                    ])
+                        ->from('md'),
                 ]),
                 Forms\Components\RichEditor::make('short_description')
                     ->maxLength(300)
                     ->helperText('Will be displayed in the event popout.')
-                    ->columnSpan(2),
+                    ->required()
+                    ->columnSpanFull(),
                 Forms\Components\RichEditor::make('description')
                     ->helperText('Will be displayed in the event details page.')
-                    ->columnSpan(2),
-                Forms\Components\TextInput::make('address'),
+                    ->required()
+                    ->columnSpanFull(),
+                Forms\Components\TextInput::make('address')
+                    ->required(),
                 Map::make('location')
                     ->columnSpanFull()
                     ->autocomplete(

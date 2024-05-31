@@ -13,35 +13,37 @@ const props = defineProps<{
         <template v-for="(event, index) in props.events" :key="event.start_date.valueOf() + event.name">
             <hr v-if="index !== 0" />
             <li>
-                <div :class="event.featured ? 'featured' : ''">
-                    <div class="date">
-                        <span class="month">
-                            {{ event.start_date.toLocaleString('default', { month: 'short' }) }}
-                        </span>
-                        <span class="date">
-                            {{ event.start_date.getDate() }}
-                        </span>
-                    </div>
-                    <div class="details">
-                        <div>
-                            <img v-if="event.featured" :src="Star" alt="Featured" aria-label="Featured" />
-                            <span>
-                                {{
-                                    format(event.start_date, 'HH:mm')
-                                }}
+                <a :href="`/events/${event.identifier}`">
+                    <div :class="event.featured ? 'featured' : ''">
+                        <div class="date">
+                            <span class="month">
+                                {{ event.start_date.toLocaleString('default', { month: 'short' }) }}
                             </span>
-                            <span v-if="event.end_date">
-                                {{
-                                    '&nbsp;- ' +
-                                    format(event.end_date, 'HH:mm')
-                                }}
+                            <span class="date">
+                                {{ event.start_date.getDate() }}
                             </span>
                         </div>
-                        <div>
-                            {{ event.name }}
+                        <div class="details">
+                            <div>
+                                <img v-if="event.featured" :src="Star" alt="Featured" aria-label="Featured" />
+                                <span>
+                                    {{
+                                        format(event.start_date, 'HH:mm')
+                                    }}
+                                </span>
+                                <span v-if="event.end_date">
+                                    {{
+                                        '&nbsp;- ' +
+                                        format(event.end_date, 'HH:mm')
+                                    }}
+                                </span>
+                            </div>
+                            <div>
+                                {{ event.name }}
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </li>
         </template>
     </ul>
@@ -75,46 +77,56 @@ ul {
         margin: 0.5em 0;
         padding: 0;
 
-        >div {
-            display: flex;
-            flex-direction: row;
-            align-items: stretch;
-            padding: 0.25em 1.5em;
+        >a {
+            color: var(--foreground);
 
-            &.featured {
-                border-left: 2px solid var(--accent);
+            &:hover {
+                text-decoration: none;
+
             }
 
-            >.date {
+            >div {
                 display: flex;
-                flex-direction: column;
-                margin-right: 1.25em;
-                justify-content: space-evenly;
+                flex-direction: row;
+                align-items: stretch;
+                padding: 0.25em 1.5em;
+
+
+                &.featured {
+                    border-left: 2px solid var(--accent);
+                }
 
                 >.date {
-                    font-size: 2rem;
-                    font-weight: normal;
-                }
-            }
-
-            .details {
-                display: flex;
-                flex-direction: column;
-                align-items: start;
-                justify-content: space-evenly;
-
-                >div:first-child {
                     display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                    justify-content: center;
+                    flex-direction: column;
+                    margin-right: 1.25em;
+                    justify-content: space-evenly;
 
-                    img {
-                        width: 1em;
-                        margin: 0 0.25em;
+                    >.date {
+                        font-size: 2rem;
+                        font-weight: normal;
+                    }
+                }
 
-                        @media screen and (prefers-color-scheme: dark) {
-                            filter: invert(100%);
+                .details {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: start;
+                    justify-content: space-evenly;
+
+                    >div:first-child {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+
+                        img {
+                            width: 1em;
+                            margin: 0 0.25em;
+
+                            @media screen and (prefers-color-scheme: dark) {
+                                filter: invert(100%);
+                            }
                         }
                     }
                 }
