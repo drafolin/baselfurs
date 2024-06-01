@@ -65,3 +65,7 @@ Route::post('/events/{id}/attend', function (string $id, Request $request) {
     $attendance->contact = $request->input('contact');
     $attendance->save();
 });
+
+Route::get('/privacy', function () {
+    return Inertia::render('PrivacyPolicy');
+});

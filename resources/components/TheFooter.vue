@@ -45,8 +45,7 @@ const year = new Date().getFullYear()
                     <h2>Privacy</h2>
                     <ul>
                         <li>
-                            <!-- TODO: Router Link -->
-                            <a href="/">Privacy Policy</a>
+                            <Link href="/privacy">Privacy Policy</Link>
                         </li>
                         <li>
                             <a href="mailto:rolinothewolf@gmail.com">Contact us</a>
