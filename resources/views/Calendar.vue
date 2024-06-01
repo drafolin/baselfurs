@@ -21,7 +21,6 @@ const events = computed(() =>
                 start: format(v.start_date, 'yyyy-MM-dd HH:mm'),
                 end: format(v.end_date, 'yyyy-MM-dd HH:mm')
             },
-            color: colors[i % colors.length],
             title: v.name,
             url: `/events/${v.identifier}`,
             description: v.short_description,

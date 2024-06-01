@@ -23,7 +23,8 @@ class Event extends Model
         'location',
         'origin_url',
         'registration_location',
-        'registration_required'
+        'registration_required',
+        'color'
     ];
 
     protected $appends = [

@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->text('description');
             $table->text('short_description');
             $table->string('address');
+            $table->string('color')->default('#2255cc');
             $table->float('lat')->nullable();
             $table->float('lng')->nullable();
             $table->string('origin_url')->nullable();

@@ -23,18 +23,31 @@ class EventResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required(),
-                Forms\Components\ToggleButtons::make('featured')
-                    ->boolean()
-                    ->required()
-                    ->grouped(),
-                Forms\Components\DateTimePicker::make('start_date')
-                    ->seconds(false)
-                    ->required(),
-                Forms\Components\DateTimePicker::make('end_date')
-                    ->seconds(false)
-                    ->required(),
+                Forms\Components\Section::make('Appearance')
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->required(),
+                        Forms\Components\Split::make([
+                            Forms\Components\ToggleButtons::make('featured')
+                                ->boolean()
+                                ->required()
+                                ->grouped(),
+                            Forms\Components\ColorPicker::make('color')
+                                ->default('#2255ee')
+                                ->required()
+                        ])
+                    ])
+                    ->columns(['default' => 1, 'md' => 2]),
+                Forms\Components\Section::make('Date')
+                    ->schema([
+                        Forms\Components\DateTimePicker::make('start_date')
+                            ->seconds(false)
+                            ->required(),
+                        Forms\Components\DateTimePicker::make('end_date')
+                            ->seconds(false)
+                            ->required(),
+                    ])
+                    ->columns(['default' => 1, 'md' => 2]),
                 Forms\Components\Section::make('Registration')->schema([
                     Forms\Components\TextInput::make('origin_url')
                         ->url()
@@ -57,30 +70,38 @@ class EventResource extends Resource
                     ])
                         ->from('md'),
                 ]),
-                Forms\Components\RichEditor::make('short_description')
-                    ->maxLength(300)
-                    ->helperText('Will be displayed in the event popout.')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\RichEditor::make('description')
-                    ->helperText('Will be displayed in the event details page.')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('address')
-                    ->required(),
-                Map::make('location')
-                    ->columnSpanFull()
-                    ->autocomplete(
-                        fieldName: 'address',
-                        countries: ['CH', 'FR', 'DE']
-                    )
-                    ->reverseGeocode([
-                        'street' => '%n %S',
-                        'city' => '%L',
-                        'state' => '%A1',
-                        'zip' => '%z',
+                Forms\Components\Section::make('Descriptions')->schema([
+                    Forms\Components\RichEditor::make('short_description')
+                        ->maxLength(300)
+                        ->helperText('Will be displayed in the event popout.')
+                        ->required()
+                        ->label('Short')
+                        ->columnSpanFull(),
+                    Forms\Components\RichEditor::make('description')
+                        ->helperText('Will be displayed in the event details page.')
+                        ->required()
+                        ->label('Full')
+                        ->columnSpanFull(),
+                ]),
+                Forms\Components\Section::make('Location')
+                    ->schema([
+                        Forms\Components\TextInput::make('address')
+                            ->required(),
+                        Map::make('location')
+                            ->label(false)
+                            ->columnSpanFull()
+                            ->autocomplete(
+                                fieldName: 'address',
+                                countries: ['CH', 'FR', 'DE']
+                            )
+                            ->reverseGeocode([
+                                'street' => '%n %S',
+                                'city' => '%L',
+                                'state' => '%A1',
+                                'zip' => '%z',
+                            ])
+                            ->autocompleteReverse(true)
                     ])
-                    ->autocompleteReverse(true)
             ]);
     }
 

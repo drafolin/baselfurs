@@ -35,6 +35,7 @@ class EventFactory extends Factory
             'description' => fake()->paragraphs(3, true),
             'short_description' => fake()->text(300),
             'address' => fake('de_CH')->address(),
+            'color' => fake()->safeHexColor(),
             'lat' => fake('de_CH')->latitude(),
             'lng' => fake('de_CH')->longitude(),
             'registration_location' => fake()->randomElement(RegistrationLocation::class),

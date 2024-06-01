@@ -47,7 +47,7 @@ return [
      * | the application so that it's available within Artisan commands.
      * |
      */
-    'url' => env('APP_URL', 'http://new.baselfurs.ch'),
+    'url' => env('APP_URL', 'http://baselfurs.ch'),
 
     /*
      * |--------------------------------------------------------------------------
