@@ -296,5 +296,14 @@
 main {
     max-width: 1200px;
     margin: auto;
+
+    ul {
+        list-style: '-';
+        padding-left: 2em;
+
+        li {
+            padding-left: 2em;
+        }
+    }
 }
 </style>
