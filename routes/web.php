@@ -56,13 +56,10 @@ Route::get('/events/{id}', function (string $id, Request $request) {
 });
 
 Route::post('/events/{id}/attend', function (string $id, Request $request) {
-    $attendance = new Attendance;
+    $attendance = new Attendance($request->all());
     $event = Event::where('identifier', $id)
         ->first();
     $attendance->event_id = $event->id;
-    $attendance->email = $request->input('email');
-    $attendance->name = $request->input('name');
-    $attendance->contact = $request->input('contact');
     $attendance->save();
 });
 
