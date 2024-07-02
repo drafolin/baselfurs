@@ -98,7 +98,7 @@ const attendanceSuccess = ref(false);
                         <span class="label">Contact</span>
                         <input type="text" name="contact" required v-model="attendance.contact">
                         <span class="hint">
-                            How we may contact you if anything happens.
+                            How we may contact you if anything happens (e.g, "@drafolin on telegram").
                         </span>
                     </label>
 

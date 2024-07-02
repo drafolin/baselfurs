@@ -44,7 +44,8 @@ class AttendancesRelationManager extends RelationManager
                     ->required()
                     ->email(),
                 Forms\Components\TextInput::make('contact')
-                    ->required(),
+                    ->required()
+                    ->helperText("Write here any way we may contact you. E.g. '@drafolin on telegram'"),
                 Forms\Components\Textarea::make('more_info')
             ]);
     }

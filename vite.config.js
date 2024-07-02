@@ -18,6 +18,7 @@ export default defineConfig({
         input: ['resources/js/app.js'],
         refresh: true,
     }),],
+    base: '/build',
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./resources/', import.meta.url))
