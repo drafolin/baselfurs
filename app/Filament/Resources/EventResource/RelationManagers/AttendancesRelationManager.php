@@ -55,9 +55,14 @@ class AttendancesRelationManager extends RelationManager
         return $table
             ->recordTitle(fn(Attendance $record) => "$record->name's attendance")
             ->columns([
-                Tables\Columns\TextColumn::make('amount_of_people'),
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('email')
+                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('amount_of_people')
+                    ->numeric()
+                    ->summarize(
+                        Tables\Columns\Summarizers\Sum::make()
+                            ->label('Total')
+                    ),
             ])
             ->filters([])
             ->headerActions([
@@ -65,7 +70,8 @@ class AttendancesRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\DeleteAction::make()
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()
             ]);
     }
 }
