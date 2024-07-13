@@ -15,6 +15,9 @@ export type JsonEvent = {
     registration_required: boolean
 }
 
+export type JsonEventDetails = JsonEvent & {
+    attendees_count: number
+}
 
 export type Event = {
     start_date: Date
@@ -31,4 +34,8 @@ export type Event = {
     registration_location: 'Local' | 'Both' | 'Remote'
     origin_url: string
     registration_required: boolean
+}
+
+export type EventDetails = Event & {
+    attendees_count: number
 }

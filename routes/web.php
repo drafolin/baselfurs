@@ -52,6 +52,9 @@ Route::get('/events/{id}', function (string $id, Request $request) {
     $event = Event::where('identifier', $id)
         ->first();
     $event['featured'] = $event['featured'] == 1;
+    $event['attendees_count'] = $event->attendances->reduce(function (int $carry, Attendance $item) {
+        return $carry + $item->amount_of_people;
+    }, 0);
     return Inertia::render('Event', $event);
 });
 

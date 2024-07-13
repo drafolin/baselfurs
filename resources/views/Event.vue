@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { JsonEvent } from '@/models/events';
+import { JsonEventDetails } from '@/models/events';
 import { ref } from 'vue';
 import "leaflet/dist/leaflet.css";
 import { useForm } from '@inertiajs/vue3'
 import { LMap, LTileLayer, LMarker } from "@vue-leaflet/vue-leaflet";
 
-const props = defineProps<JsonEvent>()
+const props = defineProps<JsonEventDetails>()
 
 const startDate = new Date(props.start_date);
 const endDate = new Date(props.end_date);
@@ -67,6 +67,7 @@ const attendanceSuccess = ref(false);
         </div>
         <div v-if="props.registration_location !== 'Remote'">
             <h2>Interested ?</h2>
+            <p>So far, {{ props.attendees_count }} furs will be attending</p>
             <div v-if="attendanceSuccess" class="attendance-success">
                 Your attendance has been registered successfully!
             </div>
