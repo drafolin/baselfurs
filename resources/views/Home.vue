@@ -237,7 +237,7 @@ main {
 div.pic {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     margin-top: 2rem;
 
