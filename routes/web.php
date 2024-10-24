@@ -45,7 +45,14 @@ Route::get('/calendar', function (Request $request) {
 });
 
 Route::get('/links', function () {
-    return Inertia::render('Links');
+    $links = \App\Models\LinkCategory::all();
+    $links->map(function ($link) {
+        $link->links = $link->links()->get();
+    });
+
+    return Inertia::render('Links', [
+        'links' => $links
+    ]);
 });
 
 Route::get('/events/{id}', function (string $id, Request $request) {

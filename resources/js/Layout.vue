@@ -12,4 +12,9 @@ import TheFooter from '@/components/TheFooter.vue'
   <TheFooter />
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+main {
+    max-width: 1600px;
+    margin: 0 auto;
+}
+</style>
