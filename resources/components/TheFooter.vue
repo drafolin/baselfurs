@@ -23,6 +23,9 @@ const year = new Date().getFullYear()
                         <li>
                             <Link href="/calendar">Calendar</Link>
                         </li>
+                        <li>
+                            <Link href="/rules">Rules [de]</Link>
+                        </li>
                     </ul>
                 </div>
 

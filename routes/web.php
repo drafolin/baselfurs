@@ -15,7 +15,7 @@ Route::get('/', function () {
         ->get();
 
     return Inertia::render('Home', [
-        'next_events' => $events
+        'next_events' => $events,
     ]);
 });
 
@@ -25,22 +25,22 @@ Route::get('/calendar', function (Request $request) {
 
     $events = Event::where([
         ['start_date', '>', $start],
-        ['start_date', '<', $end]
+        ['start_date', '<', $end],
     ])
         ->orWhere([
             ['end_date', '>', $start],
-            ['end_date', '<', $end]
+            ['end_date', '<', $end],
         ])
         ->orWhere([
             ['start_date', '<', $start],
-            ['end_date', '>', $end]
+            ['end_date', '>', $end],
         ])
         ->get();
 
     return Inertia::render('Calendar', [
         'events' => $events,
         'start' => $start,
-        'end' => $end
+        'end' => $end,
     ]);
 });
 
@@ -51,7 +51,7 @@ Route::get('/links', function () {
     });
 
     return Inertia::render('Links', [
-        'links' => $links
+        'links' => $links,
     ]);
 });
 
@@ -62,6 +62,7 @@ Route::get('/events/{id}', function (string $id, Request $request) {
     $event['attendees_count'] = $event->attendances->reduce(function (int $carry, Attendance $item) {
         return $carry + $item->amount_of_people;
     }, 0);
+
     return Inertia::render('Event', $event);
 });
 
@@ -75,4 +76,8 @@ Route::post('/events/{id}/attend', function (string $id, Request $request) {
 
 Route::get('/privacy', function () {
     return Inertia::render('PrivacyPolicy');
+});
+
+Route::get('/rules', function () {
+    return Inertia::render('Rules');
 });
