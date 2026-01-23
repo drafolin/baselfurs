@@ -64,22 +64,52 @@ const locale = window.navigator.language;
 </template>
 
 <style lang="scss">
-.calendar-month__event-icon {
-    height: 8px;
-    width: 8px;
-    margin-right: 2px;
-    border-radius: 0;
+.calendar-root {
+    font-family: Jost, Helvetica, Arial, sans-serif !important;
 
-    .event-flyout & {
-        height: 1em;
-        width: 1em;
+    .calendar-month__week:first-child {
+        border-top: 1px solid #fff3 !important;
     }
 
-    .qalendar-is-small & {
-        height: 6px;
-        width: 6px;
-        margin: 0 1px;
+    .calendar-month__week-day-name {
+        font-size: 14px !important;
     }
+
+
+    @media screen and (prefers-color-scheme: dark) {
+        background-color: transparent !important;
+        border: 1px solid #fff3 !important;
+
+        .calendar-month__weekday {
+            border-color: #fff3 !important;
+        }
+    }
+}
+
+.calendar-month__event {
+    font-size: 12px !important;
+
+    .calendar-month__event-icon {
+        height: 8px;
+        width: 8px;
+        margin-right: 2px;
+        border-radius: 0;
+
+        .event-flyout & {
+            height: 1em;
+            width: 1em;
+        }
+
+        .qalendar-is-small & {
+            height: 6px;
+            width: 6px;
+            margin: 0 1px;
+        }
+    }
+}
+
+.calendar-month__weekday {
+    padding: .25rem;
 }
 
 .qalendar-is-small .calendar-month__event {
