@@ -1,22 +1,24 @@
 <script lang="ts" setup>
-import MeetPic from '@/assets/meetpic.jpg'
-import EventList from '@/components/EventList.vue'
-import Rolino from '@/assets/organizers/rolino.jpeg'
-import Misaki from '@/assets/organizers/misaki.jpg'
-import Joyce from '@/assets/organizers/joyce.jpg'
-import { ref } from 'vue'
-import { Link } from '@inertiajs/vue3'
-import { Event, JsonEvent } from '@/models/events'
+import MeetPic from "@/assets/meetpic.jpg";
+import EventList from "@/components/EventList.vue";
+import Rolino from "@/assets/organizers/rolino.jpeg";
+import Misaki from "@/assets/organizers/misaki.png";
+import Shenzi from "@/assets/organizers/shenzi.jpg";
+import { ref } from "vue";
+import { Link } from "@inertiajs/vue3";
+import { Event, JsonEvent } from "@/models/events";
 
 const { next_events: propsEvent } = defineProps<{ next_events: JsonEvent[] }>();
 
-const events = ref<Event[]>(propsEvent.map((v, i) => {
-    return {
-        ...v,
-        start_date: new Date(v.start_date),
-        end_date: new Date(v.end_date)
-    }
-}))
+const events = ref<Event[]>(
+    propsEvent.map((v, i) => {
+        return {
+            ...v,
+            start_date: new Date(v.start_date),
+            end_date: new Date(v.end_date),
+        };
+    }),
+);
 </script>
 
 <template>
@@ -32,13 +34,18 @@ const events = ref<Event[]>(propsEvent.map((v, i) => {
 
                     <EventList :events="events" class="calendar" />
 
-                    <Link class="primary button" href="/calendar">Open Calendar</Link>
+                    <Link class="primary button" href="/calendar">
+                        Open Calendar
+                    </Link>
                 </div>
             </div>
 
             <div class="pic">
-                <img :src="MeetPic" alt="A picture of the furmeet, with two fursuited furs in the foreground"
-                    class="meet-pic" />
+                <img
+                    :src="MeetPic"
+                    alt="A picture of the furmeet, with two fursuited furs in the foreground"
+                    class="meet-pic"
+                />
             </div>
         </section>
 
@@ -46,8 +53,8 @@ const events = ref<Event[]>(propsEvent.map((v, i) => {
             <div>
                 <h2>Want to get to know the fandom better?</h2>
                 <p>
-                    Then join one of our numerous chats, groups and channels and write with us! Everyone is
-                    welcome!
+                    Then join one of our numerous chats, groups and channels and
+                    write with us! Everyone is welcome!
                 </p>
                 <Link class="primary button" href="/links">Links list</Link>
             </div>
@@ -62,8 +69,8 @@ const events = ref<Event[]>(propsEvent.map((v, i) => {
                     </a>
                     <p class="name">Rolino</p>
                     <ul>
-                        <li>Stammtisch Organizer Basel</li>
-                        <li>Programmer</li>
+                        <li>Stammtisch Owner</li>
+                        <li>Admin</li>
                     </ul>
                 </li>
                 <li>
@@ -72,17 +79,18 @@ const events = ref<Event[]>(propsEvent.map((v, i) => {
                     </a>
                     <p class="name">Misaki</p>
                     <ul>
-                        <li>Organizer Furmeet Laufental</li>
-                        <li>IT Engineer</li>
+                        <li>Stammi B.Ü.S.I.</li>
+                        <li>Moderator</li>
                     </ul>
                 </li>
                 <li>
-                    <a href="https://t.me/SnugglyJoyce" target="_blank">
-                        <img :src="Joyce" alt="Joyce" />
+                    <a href="https://t.me/ShenziWenzii" target="_blank">
+                        <img :src="Shenzi" alt="Shenzi" />
                     </a>
-                    <p class="name">Joyce</p>
+                    <p class="name">Shenzi</p>
                     <ul>
-                        <li>Organizer Furmeet Laufental</li>
+                        <li>Stammi Mommy</li>
+                        <li>Moderator</li>
                     </ul>
                 </li>
             </ul>
@@ -92,7 +100,7 @@ const events = ref<Event[]>(propsEvent.map((v, i) => {
 
 <style lang="scss" scoped>
 main {
-    >section {
+    > section {
         display: flex;
         flex-direction: row;
         min-height: calc(100vh - 7rem);
@@ -115,7 +123,7 @@ main {
             padding: 1em;
         }
 
-        >div.sub {
+        > div.sub {
             padding: 1em min(6.5rem, 8vw);
 
             @media screen and (max-width: 660px) {
@@ -145,7 +153,7 @@ main {
         &.learn-more {
             align-items: center;
 
-            >div {
+            > div {
                 background-color: rgba(var(--accent-rgb), 0.1);
                 width: 100%;
                 height: fit-content;
@@ -181,7 +189,7 @@ main {
                 font-size: 3rem;
             }
 
-            >ul {
+            > ul {
                 list-style: none;
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr;
@@ -195,7 +203,7 @@ main {
                     width: min(80vw, 20rem);
                 }
 
-                >li {
+                > li {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
