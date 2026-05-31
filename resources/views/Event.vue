@@ -47,6 +47,14 @@ const attendanceSuccess = ref(false);
             </ul>
         </div>
         <div v-html="props.description" />
+        <div v-if="props.galleries?.length" class="galleries">
+            <h2>Community Galleries</h2>
+            <ul>
+                <li v-for="gallery in props.galleries" :key="gallery.url">
+                    <a :href="gallery.url" target="_blank">{{ gallery.name }}</a>
+                </li>
+            </ul>
+        </div>
         <h2>Location</h2>
         <div class="address">
             <div class="map">
@@ -160,6 +168,30 @@ main>div {
             @media screen and (min-width: 660px) {
                 max-width: 40vw;
             }
+        }
+    }
+}
+
+.galleries {
+    ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+    }
+
+    a {
+        display: inline-block;
+        padding: 0.5em 1em;
+        border: 1px solid color-mix(in oklab, var(--foreground), var(--background) 85%);
+        border-radius: var(--border-radius);
+        text-decoration: none;
+        color: var(--foreground);
+        transition: background-color 0.2s;
+
+        &:hover {
+            background-color: color-mix(in oklab, var(--foreground), var(--background) 90%);
         }
     }
 }

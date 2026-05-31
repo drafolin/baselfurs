@@ -10,6 +10,7 @@ use Filament\Resources\Resource;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Filament\Forms;
+use Filament\Forms\Components\Repeater;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -101,7 +102,28 @@ class EventResource extends Resource
                                 'zip' => '%z',
                             ])
                             ->autocompleteReverse(true)
+                    ]),
+                Forms\Components\Section::make('Galleries')
+                    ->schema([
+                        Repeater::make('galleries')
+                            ->hiddenLabel()
+                            ->schema([
+                                Forms\Components\TextInput::make('name')
+                                    ->label('Name')
+                                    ->required()
+                                    ->columnSpan(1),
+                                Forms\Components\TextInput::make('url')
+                                    ->label('URL')
+                                    ->url()
+                                    ->required()
+                                    ->columnSpan(1),
+                            ])
+                            ->columnSpanFull()
+                            ->collapsible()
+                            ->itemLabel(fn(array $state): ?string => $state['name'] ?? "N/A")
+                            ->reorderable(),
                     ])
+                ->hidden(fn(array $state, string $operation)=> count($state['galleries']) == 0 && $operation == 'view'),
             ]);
     }
 

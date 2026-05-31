@@ -1,3 +1,8 @@
+export type Gallery = {
+    name: string
+    url: string
+}
+
 export type JsonEvent = {
     start_date: string
     end_date: string
@@ -13,6 +18,7 @@ export type JsonEvent = {
     registration_location: 'Local' | 'Both' | 'Remote'
     origin_url: string
     registration_required: boolean
+    galleries?: Gallery[]
 }
 
 export type JsonEventDetails = JsonEvent & {
@@ -34,6 +40,7 @@ export type Event = {
     registration_location: 'Local' | 'Both' | 'Remote'
     origin_url: string
     registration_required: boolean
+    galleries?: Gallery[]
 }
 
 export type EventDetails = Event & {

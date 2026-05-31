@@ -24,7 +24,8 @@ class Event extends Model
         'origin_url',
         'registration_location',
         'registration_required',
-        'color'
+        'color',
+        'galleries',
     ];
 
     protected $appends = [
@@ -34,7 +35,8 @@ class Event extends Model
     protected $casts = [
         'featured' => 'boolean',
         'registration_required' => 'boolean',
-        'registration_location' => RegistrationLocation::class
+        'registration_location' => RegistrationLocation::class,
+        'galleries' => 'array',
     ];
 
     public function attendances(): HasMany
