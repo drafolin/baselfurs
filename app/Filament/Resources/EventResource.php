@@ -143,6 +143,7 @@ class EventResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->grow(),
             ])
+            ->defaultSort("start_date", "DESC")
             ->filters([
                 Filter::make('is_future')
                     ->query(fn(Builder $query): Builder => $query
