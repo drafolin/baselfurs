@@ -9,7 +9,7 @@
         "cheesegrits/filament-google-maps": "^3.0",
         "filament/filament": "^3.3",
         "inertiajs/inertia-laravel": "^1.1",
-        "laravel/framework": "^11.0",
+        "laravel/framework": "^12.61",
         "laravel/tinker": "^2.9"
     },
     "require-dev": {
